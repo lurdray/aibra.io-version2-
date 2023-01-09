@@ -1,0 +1,366 @@
+{% extends 'app_user/auth_base.html' %}
+{% load static %}
+{% load humanize %}
+
+
+{% block content %}
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="notification is-toast alert alert-{{message.tags}} text-center" role="alert" style="background-color: red; color: #fff; border-radius: 6px; font-weight: 600; z-index: 1;">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+{% include "app_user/header.html" %}
+{% include "app_user/sidebar.html" %}
+
+
+
+<!-- Page Content Holder -->
+        <div id="content">
+
+            <div class="content-admin-main">
+
+                <div class="wt-admin-right-page-header clearfix">
+                    <h2>Asign Recruiter</h2>
+                    <div class="breadcrumbs"><a href="#">Home</a><span>Dasboard</span></div>
+                </div>
+
+                
+
+                <div class="twm-pro-view-chart-wrap">
+                    <div class="row">
+                        
+                        
+
+                        <div class="col-lg-4 col-md-4 rightSidebar">
+
+                            <div class="side-bar">
+
+                                <div class="sidebar-elements search-bx">
+                                                                            
+                                    <form>
+
+                                        <div class="form-group mb-4">
+                                            <h4 class="section-head-small mb-4">Category</h4>
+                                            <select class="wt-select-bar-large selectpicker"  data-live-search="true" data-bv-field="size">
+                                                <option selected>All Category</option>
+                                                <option>Web Designer</option>
+                                                <option>Developer</option>
+                                                <option>Acountant</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group mb-4">
+                                            <h4 class="section-head-small mb-4">Keyword</h4>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" placeholder="Job Title or Keyword">
+                                                <button class="btn" type="button"><i class="feather-search"></i></button>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group mb-4">
+                                            <h4 class="section-head-small mb-4">Location</h4>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" placeholder="Search location">
+                                                <button class="btn" type="button"><i class="feather-map-pin"></i></button>
+                                            </div>
+                                        </div>
+
+                                        <div class="twm-sidebar-ele-filter">
+                                            <h4 class="section-head-small mb-4">Job Type</h4>
+                                            <ul>
+                                                <li>
+                                                    <div class=" form-check">
+                                                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                        <label class="form-check-label" for="exampleCheck1">Freelance</label>
+                                                    </div>
+                                                    <span class="twm-job-type-count">09</span>
+                                                </li>
+
+                                                <li>
+                                                    <div class=" form-check">
+                                                        <input type="checkbox" class="form-check-input" id="exampleCheck2">
+                                                        <label class="form-check-label" for="exampleCheck2">Full Time</label>
+                                                    </div>
+                                                    <span class="twm-job-type-count">07</span>
+                                                </li>
+
+                                                <li>
+                                                    <div class=" form-check">
+                                                        <input type="checkbox" class="form-check-input" id="exampleCheck3">
+                                                        <label class="form-check-label" for="exampleCheck3">Internship</label>
+                                                    </div>
+                                                    <span class="twm-job-type-count">15</span>
+                                                </li>
+
+                                                <li>
+                                                    <div class=" form-check">
+                                                        <input type="checkbox" class="form-check-input" id="exampleCheck4">
+                                                        <label class="form-check-label" for="exampleCheck4">Part Time</label>
+                                                    </div>
+                                                    <span class="twm-job-type-count">20</span>
+                                                </li>
+
+                                                <li>
+                                                    <div class=" form-check">
+                                                        <input type="checkbox" class="form-check-input" id="exampleCheck5">
+                                                        <label class="form-check-label" for="exampleCheck5">Temporary</label>
+                                                    </div>
+                                                    <span class="twm-job-type-count">22</span>
+                                                </li>
+
+                                                <li>
+                                                    <div class=" form-check">
+                                                        <input type="checkbox" class="form-check-input" id="exampleCheck6">
+                                                        <label class="form-check-label" for="exampleCheck6">Volunteer</label>
+                                                    </div>
+                                                    <span class="twm-job-type-count">25</span>
+                                                </li>
+
+                                            </ul>
+                                        </div>
+
+                                        <div class="twm-sidebar-ele-filter">
+                                            <h4 class="section-head-small mb-4">Date Posts</h4>
+                                            <ul>
+                                                <li>
+                                                    <div class="form-check">
+                                                        <input type="radio" class="form-check-input" id="exampleradio1">
+                                                        <label class="form-check-label" for="exampleradio1">Last hour</label>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="form-check">
+                                                        <input type="radio" class="form-check-input" id="exampleradio2">
+                                                        <label class="form-check-label" for="exampleradio2">Last 24 hours</label>
+                                                    </div>
+                                                </li>
+
+                                                <li>
+                                                    <div class="form-check">
+                                                        <input type="radio" class="form-check-input" id="exampleradio3">
+                                                        <label class="form-check-label" for="exampleradio3">Last 7 days</label>
+                                                    </div>
+                                                </li>
+
+                                                <li>
+                                                    <div class="form-check">
+                                                        <input type="radio" class="form-check-input" id="exampleradio4">
+                                                        <label class="form-check-label" for="exampleradio4">Last 14 days</label>
+                                                    </div>
+                                                </li>
+
+                                                <li>
+                                                    <div class="form-check">
+                                                        <input type="radio" class="form-check-input" id="exampleradio5">
+                                                        <label class="form-check-label" for="exampleradio5">Last 30 days</label>
+                                                    </div>
+                                                </li>
+
+                                                <li>
+                                                    <div class="form-check">
+                                                        <input type="radio" class="form-check-input" id="exampleradio6">
+                                                        <label class="form-check-label" for="exampleradio6">All</label>
+                                                    </div>
+                                                </li>
+                             
+                                            </ul>
+                                        </div>
+
+                                        <div class="twm-sidebar-ele-filter">
+                                            <h4 class="section-head-small mb-4">Type of employment</h4>
+                                            <ul>
+                                                <li>
+                                                    <div class="form-check">
+                                                        <input type="radio" class="form-check-input" id="Freelance1">
+                                                        <label class="form-check-label" for="Freelance1">Freelance</label>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="form-check">
+                                                        <input type="radio" class="form-check-input" id="FullTime1">
+                                                        <label class="form-check-label" for="FullTime1">Full Time</label>
+                                                    </div>
+                                                </li>
+
+                                                <li>
+                                                    <div class="form-check">
+                                                        <input type="radio" class="form-check-input" id="Intership1">
+                                                        <label class="form-check-label" for="Intership1">Intership</label>
+                                                    </div>
+                                                </li>
+
+                                                <li>
+                                                    <div class="form-check">
+                                                        <input type="radio" class="form-check-input" id="Part-Time1">
+                                                        <label class="form-check-label" for="Part-Time1">Part Time</label>
+                                                    </div>
+                                                </li>
+                             
+                                            </ul>
+                                        </div>
+                                        
+                                    </form>
+                                    
+                                </div>
+
+                                <div class="widget tw-sidebar-tags-wrap">
+                                    <h4 class="section-head-small mb-4">Tags</h4>
+                                    
+                                    <div class="tagcloud">
+                                        <a href="job-list.html">General</a>
+                                        <a href="job-list.html">Jobs </a>
+                                        <a href="job-list.html">Payment</a>                                            
+                                        <a href="job-list.html">Application </a>
+                                        <a href="job-list.html">Work</a>
+                                        <a href="job-list.html">Recruiting</a>
+                                        <a href="job-list.html">Employer</a>
+                                        <a href="job-list.html">Income</a>
+                                        <a href="job-list.html">Tips</a>
+                                    </div>
+                                </div>
+
+                                
+                            </div>
+
+                            <div class="twm-advertisment" style="background-image:url(images/add-bg.jpg);">
+                               <div class="overlay"></div>
+                               <h4 class="twm-title">Recruiting?</h4>
+                               <p>Get Best Matched Jobs On your <br>
+                                Email. Add Resume NOW!</p>
+                                <a href="about-1.html" class="site-button white">Read More</a> 
+                            </div>
+
+                        </div>
+
+                        
+
+                        <div class="col-lg-8 col-md-8 mb-4">
+                            <div class="panel panel-default">
+                                <div class="panel-heading wt-panel-heading p-a20">
+                                    <h4 class="panel-tittle m-a0">Recent Applicants</h4>
+                                </div>
+                                <div class="panel-body wt-panel-body bg-white">
+                                    <div class="twm-dashboard-candidates-wrap">
+                                        <div class="row">
+                                        	{%  if all_recruiters %}
+                  								{% for item in all_recruiters %}
+                  								{% if item.bio == 'This agency have not updated their bio..' %}
+                  
+                  							{% else %}
+                                            <div class="col-xl-12 col-lg-12 col-md-12">
+                                                 <div class="twm-dash-candidates-list">
+                                                     <div class="twm-media">
+                                                         <div class="twm-media-pic">
+                                                            <img src="{{ item.agency_logo.url }}" alt="#">
+                                                         </div>
+                                                         
+                                                     </div>
+                                                     <div class="twm-mid-content">
+                                                         <a href="{% url 'job:assign2' request_id item.user.username %}" class="twm-job-title">
+                                                             <h4>{{ item.agency_name }} </h4>
+                                                         </a>
+                                                     	
+                                                         
+                                                         <p><small>{{ item.bio }}</small></p>
+                                                         
+                                                         <div class="twm-fot-content">
+                                                             <div class="twm-left-info">
+                                                                <p class="twm-candidate-address"><i class="feather-map-pin"></i>{{ item.country }}</p>
+                                                                <div class="twm-jobs-vacancies">{{ item.charge }} <span>ABR</span></div>
+                                                             </div>
+                                                             <div class="twm-right-btn">
+
+                                                                <ul class="twm-controls-icon list-unstyled">
+                                                                    <li>
+                                                                    	<a href="{% url 'job:assign2' request_id item.user.username %}">
+                                                                        <button title="See More" data-bs-toggle="tooltip" data-bs-placement="top">
+                                                                            <span class="fa fa-eye"></span>
+                                                                        </button></a>
+
+                                                                    </li>
+                                                                    <li>
+                                                                        <button title="Send message" data-bs-toggle="tooltip" data-bs-placement="top">
+                                                                            <span class="far fa-envelope-open"></span>
+                                                                        </button>
+                                                                    </li>
+                                                                    <li>
+                                                                        <button title="Delete" data-bs-toggle="tooltip" data-bs-placement="top">
+                                                                            <span class="far fa-trash-alt"></span>
+                                                                        </button>
+                                                                    </li>
+                                                                </ul>
+
+                                                             </div>
+                                                        </div>
+                                                     </div>
+                                                     
+                                                 </div>
+                                            </div>
+                                            {% endif %}
+                  							{% endfor %}
+
+                							{% else %}
+                  							<h3>Sorry, no result</h3>
+                  							<br />
+                  							<small>Please search again...</small>
+
+                							{% endif %}
+
+                                        </div>
+                                    </div>              
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+                                                      
+            </div>
+
+    	</div>
+
+        <!--Delete Profile Popup-->
+        <div class="modal fade twm-model-popup" id="delete-dash-profile" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"  aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h4 class="modal-title">Do you want to delete your profile?</h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="site-button" data-bs-dismiss="modal">No</button>
+                    <button type="button" class="site-button outline-primary">Yes</button>
+                </div>
+            </div>
+            </div>
+        </div>
+
+
+        <!--Logout Profile Popup-->
+        <div class="modal fade twm-model-popup" id="logout-dash-profile" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h4 class="modal-title">Do you want to Logout your profile?</h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="site-button" data-bs-dismiss="modal">No</button>
+                    <button type="button" class="site-button outline-primary">Yes</button>
+                </div>
+            </div>
+            </div>
+        </div>
+          
+
+	</div>
+
+{% endblock %}

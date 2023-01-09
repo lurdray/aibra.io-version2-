@@ -1,0 +1,118 @@
+{% extends 'app_user/auth_base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="notification is-toast alert alert-{{message.tags}} text-center" role="alert" style="background-color: red; color: #fff; border-radius: 6px; font-weight: 600; z-index: 1;">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+
+{% include "app_user/header.html" %}
+{% include "app_user/sidebar.html" %}
+
+            <div id="content">
+
+            <div class="content-admin-main">
+
+            
+
+            <!-- Employer Account START -->
+            <div class="section-full p-t120  p-b90 site-bg-white bg-cover twm-ac-fresher-wrap" 
+            style="background-image:url({% static 'assets/images/background/pattern.jpg' %})">
+                <span class="twm-section-bg-img">
+                    <img src="images/reg-bg2.png" alt="">
+                </span>
+
+                <div class="container">
+                    <div class="row d-flex justify-content-center">
+                        
+                        <div class="col-lg-8 col-md-12">
+                            <div class="twm-right-section-panel-wrap2">
+                                <!--Filter Short By-->
+                                <div class="twm-right-section-panel " style="border: solid 1px #24695c;">
+                                    
+                                    <!--Basic Information-->
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading wt-panel-heading p-a20">
+                                            <h4 class="panel-tittle m-a0">Resume Headline</h4>
+                                        </div>
+                                        <div class=" wt-panel-body p-a20 ">
+
+                                            
+
+                                            <div class="twm-tabs-style-1" >
+                                                
+                                                <div class="tab-content" id="myTab3Content">
+                                                    <div class="tab-pane fade show active" id="Personal">
+                                                    
+                                                        <div class="row">
+                                                            <form class="" method="post">
+                                                                {% csrf_token %}
+
+                                                                <div class="col-xl-12 col-lg-12 col-md-12">
+                                                                    <div class="form-group">
+                                                                        <label>Title</label>
+                                                                        <div class="ls-inputicon-box"> 
+                                                                            <input class="form-control"  name="title" type="text" placeholder="Tell us about your self" value="{{ title }}">
+                                                                            <i class="fs-input-icon fa fa-file"></i>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-xl-12 col-lg-12 col-md-12">
+                                                                    <div class="form-group">
+                                                                        <label>Summary</label>
+                                                                        <div class="ls-inputicon-box"> 
+                                                                            <textarea name="opening_statement" class="form-control" rows="5">{{ opening_statement }}</textarea>
+                                                                            
+                                                                            <i class="fs-input-icon fa fa-file"></i>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>                
+                                                                <div class="col-xl-12 col-lg-12 col-md-12">                                  
+                                                                    <div class="text-left">
+                                                                        <button type="submit" class="site-button">Update</button>
+                                                                    </div>
+                                                                </div>                                         
+                                                            </form>
+                                                        </div>
+                                                        
+                                                    </div>
+
+                                                            
+
+                                                                                                   
+                                                        
+                                                        </div>
+                                                    </div>
+
+                                                    
+
+
+                                                    
+                                                </div>
+                                            </div>  
+
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>   
+             <!-- Employer Account START END -->
+          
+            
+     
+        </div>
+        <!-- CONTENT END -->
+
+    {% endblock %}

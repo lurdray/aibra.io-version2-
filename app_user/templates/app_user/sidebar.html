@@ -1,0 +1,101 @@
+{% load static %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+<!-- Sidebar Holder -->
+        <nav id="sidebar-admin-wraper" style="background-color:#cedfde">
+            <div class="page-logo">
+                <a href="/"><img src="https://aibra.io/static/main/images/aibra4.png" alt=""></a>
+            </div>
+            
+            <div class="admin-nav scrollbar-macosx">
+                <ul>
+                    <li>
+                        <a href="{% url 'app_user:app' %}"><i class="fa fa-home"></i><span class="admin-nav-text">Dashboard</span></a>
+                    </li>
+                    
+                    {% url 'job:index' as index %}
+                    <li class="{% if index == request.path %} active {% endif %}">
+                        {% if app_user.account_type == "recruiter" %}
+                        <a href="javascript:;"><i class="fa fa-suitcase"></i><span class="admin-nav-text">Jobs</span></a>
+                        <ul class="sub-menu">
+                            <li> <a href="{% url 'job:all_requests' %}"><span class="admin-nav-text">View Requests</span></a></li>
+                            <li> <a href="{% url 'job:add_job' %}"><span class="admin-nav-text">Post a New Jobs</span></a></li>
+                            <li> <a href="{% url 'job:manage_job' %}"><span class="admin-nav-text">Manage Jobs</span></a></li>
+                            <li> <a href="{% url 'app_user:all_recruits' %}"><span class="admin-nav-text">All Candidates</span></a></li>
+                        </ul>
+                        {% endif %}
+                        {% if app_user.account_type == "candidate" %}
+                        <a href="javascript:;"><i class="fa fa-suitcase"></i><span class="admin-nav-text">Jobs</span></a>
+                        <ul class="sub-menu">
+                        <li> <a href="{% url 'job:index' %}"><span class="admin-nav-text">Available Jobs</span></a></li>
+                        <li> <a href="{% url 'job:my_applications' %}"><span class="admin-nav-text">My Applications</span></a></li>
+                        </ul>
+
+                        {% endif %}
+                        {% if app_user.account_type == "company" %}
+                        <li><a href="{% url 'job:request' %}"><span class="admin-nav-text">Request Candidate</span></a></li>
+                        {% endif %} 
+                    {% url 'resume:index' as resume %}
+                    <li class="{% if resume == request.path %} active {% endif %}">
+                        <a href="{{ resume }}"><i class="fa fa-receipt"></i><span class="admin-nav-text">Resume</span></a>
+                    </li>
+                    
+                    {% url 'wallet:index' as wallet %}
+                    <li class="{% if wallet == request.path %} active {% endif %}">
+                        <a href="{{ wallet }}"><i class="fa fa-money-bill-alt"></i><span class="admin-nav-text">Wallet</span></a>
+                    </li>
+                     {% url 'staking:my_stakes' as my_stakes %} 
+                    <li class="{% if my_stake == request.path %} active {% endif %}">
+                        <a href="javascript:;"><i class="fas fa-money-bill-wave"></i><span class="admin-nav-text">Earnings <sup class="twm-msg-noti">2</sup></span></a>
+                        <ul class="sub-menu">
+                            
+                            <li> <a href="{{ my_stakes }}"><span class="admin-nav-text">Staking</span></a></li>
+
+                            <li> <a href="dash-messages_2.html"><span class="admin-nav-text">Referral</span></a></li>
+                        </ul>
+                    </li>
+
+                      
+                    
+                    <li>
+                        <a href="dash-my-profile.html"><i class="fa fa-comments"></i><span class="admin-nav-text">Chat</span></a>
+                    </li>
+
+                    <li>
+                        <a href="dash-change-password.html"><i class="fa fa-fingerprint"></i><span class="admin-nav-text">Change Password</span></a>
+                    </li>
+
+                    <li>
+                        <a href="javascript:;"><i class="fa fa-book-reader"></i><span class="admin-nav-text">Learning</span></a>
+                    </li>
+                    
+                    <li>
+                        <a href="javascript:;"><i class="fa fa-blog"></i><span class="admin-nav-text">Blog</span></a>
+                    </li>  
+                                       
+                    <li>
+                        <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#logout-dash-profile"><i class="fa fa-share-square"></i><span class="admin-nav-text">Logout</span></a>
+                    </li>                    
+                    
+                </ul>
+            </div>   
+        </nav>
+
+        <!--Logout Profile Popup-->
+        <div class="modal fade twm-model-popup" id="logout-dash-profile" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h4 class="modal-title">Do you want to Logout your profile?</h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="site-button" data-bs-dismiss="modal">No</button>
+                    <a role="button" href="{% url 'app_user:sign_out' %}" type="button" class="site-button outline-primary">Yes</a>
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <!-- Page Content Holder -->

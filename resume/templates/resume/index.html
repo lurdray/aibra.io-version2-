@@ -1,0 +1,562 @@
+{% extends 'app_user/auth_base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="notification is-toast alert alert-{{message.tags}} text-center" role="alert" style="background-color: red; color: #fff; border-radius: 6px; font-weight: 600; z-index: 1;">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+
+{% include "app_user/header.html" %}
+
+
+{% include "app_user/sidebar.html" %}
+
+            <div id="content">
+
+            <div class="content-admin-main">
+
+                <div class="wt-admin-right-page-header clearfix">
+                    <h2 style="text-align:center;">Resume</h2>
+                    
+                </div>
+                
+
+                <div class="container">
+                    <div class="row">
+                        
+                        
+                        
+
+                        <div class="col-xl-12 col-lg-12 col-md-12 m-b30">
+                            <div class="twm-right-section-panel site-bg-gray">
+                                
+                                    <!--Resume Headline-->
+                                    <div class="panel panel-default mb-3">
+                                        <div class="panel-heading wt-panel-heading p-a20 panel-heading-with-btn ">
+                                            <h4 class="panel-tittle m-a0">Resume Headline</h4>
+                                        {% if app_user.resume.titles %}
+
+                                            
+                                            <a href="{% url 'resume:update_resume1' %}" role="button" title="Edit" class="site-text-primary">
+                                                <span class="fa fa-edit"></span>
+                                            </a>
+                                        
+                                            {% else %}
+                                            <a href="{% url 'resume:update_resume1' %}" role="button" title="Add Work Experience" class="site-text-primary"><span class="fa fa-plus-square"></span></a>
+                                        {% endif %}
+
+                                        </div>
+                                        
+                                        <div class="panel-body wt-panel-body p-a20 ">
+                                            <div class="twm-panel-inner">
+                                            
+                                                <p>{{ app_user.resume.titles.first }}: {{ app_user.resume.opening_statements.first }}</p>
+                                            </div>             
+                                        </div>
+                                            
+                                        
+                                    </div>
+
+                                    <!--Key Skills-->
+                                    <div class="panel panel-default mb-3">
+                                        <div class="panel-heading wt-panel-heading p-a20 panel-heading-with-btn ">
+                                            <h4 class="panel-tittle m-a0">Key Skills</h4>
+                                            {% if app_user.resume.hobbies.all %}
+                                            <a href="{% url 'resume:add_hobby' %}" role="button" title="Add Hobby" class="site-text-primary"><span class="fa fa-plus-square"></span></a>
+                                            {% for item in app_user.resume.hobbies.all %}
+
+                                        {% endfor %}
+                                            {% else %}
+                                            <a href="{% url 'resume:add_hobby' %}" role="button" title="Add Hobby" class="site-text-primary"><span class="fa fa-plus-square"></span></a>
+                                        {% endif %}
+                                            
+                                        </div>
+                                        <div class="panel-body wt-panel-body p-a20 ">
+                                            <div class="tw-sidebar-tags-wrap">
+                                                <div class="tagcloud">
+                                                
+                                                    {% if app_user.resume.hobbies.all %}
+
+
+
+                                                        {% for item in app_user.resume.hobbies.all %}
+                                                        <a href="{% url 'resume:edit_hobby' item.id %}">{{ item.hobby }}</a>
+
+
+                                                        {% endfor %}
+                                                    {% else %}
+                                                    <p>Sorry, nothing here to see!</p>
+                                                    {% endif %}
+                                                
+                                                    
+                                                </div>
+                                            </div>            
+                                        </div>
+                                        <!--Modal popup -->
+                                        
+                                    </div>
+
+                                    <!--Employment-->
+
+                                    <div class="panel panel-default mb-3">
+                                        <div class="panel-heading wt-panel-heading p-a20 panel-heading-with-btn ">
+                                            <h4 class="panel-tittle m-a0">Work Experience</h4>
+                                            {% if app_user.resume.work_experiences.all %}
+                                                <a href="{% url 'resume:update_resume2' %}" role="button" title="Add Work Experience" class="site-text-primary"><span class="fa fa-plus-square"></span></a>
+                                            {% for item in app_user.resume.work_experiences.all %}
+
+                                        {% endfor %}
+                                            {% else %}
+                                            <a href="{% url 'resume:update_resume2' %}" role="button" title="Add Work Experience" class="site-text-primary"><span class="fa fa-plus-square"></span></a>
+                                        {% endif %}
+                                        </div>
+                                        {% if app_user.resume.work_experiences.all %}
+                                        {% for item in app_user.resume.work_experiences.all %}
+                                        <div class="panel-body wt-panel-body p-a20 ">
+
+                                            <div class="twm-panel-inner">
+                                                <div class="twm-list-wrap">
+                                                    <div class="twm-list-inner d-flex justify-content-between">
+                                                        <b><a target="_blank" href="{{ item.link }}">{{ item.project}}</a></b> 
+                                                        <a href="{% url 'resume:edit_resume2' item.id %}" role="button" title="Edit" class="site-text-primary">
+                                                         <span class="fa fa-edit"></span>
+                                                        </a>
+
+                                                    </div>
+                                                    <p><b>{{ item.work_experience }}</b></p>
+                                                <p>{{ item.company }}</p>
+                                                <p>Since: ({{ item.date_from }}) - to: ({{ item.date_to }})</p>
+                                                <p>{{ item.detail }}</p>
+                                                </div>
+                                                
+                                            </div>       
+                                        </div>
+                                        
+                                        {% endfor %}
+                                            {% else %}
+                                            <div class="panel-body wt-panel-body p-a20 ">
+                                                <p>No Experience to show</p>
+                                            </div>
+                                        {% endif %}
+
+                                        
+
+                                    </div>
+
+                                    <!--Education-->
+                                    <div class="panel panel-default mb-3">
+                                        
+                                        <div class="panel-heading wt-panel-heading p-a20 panel-heading-with-btn ">
+                                            <h4 class="panel-tittle m-a0">Education</h4>
+                                        {% if app_user.resume.educations.all %}
+                                            <a href="{% url 'resume:add_education' %}" role="button" title="Add Education" class="site-text-primary"><span class="fa fa-plus-square"></span></a>
+                                            {% for item in app_user.resume.educations.all %}
+
+                                        {% endfor %}
+                                            {% else %}
+                                            <a href="{% url 'resume:add_education' %}" role="button" title="Add Education" class="site-text-primary"><span class="fa fa-plus-square"></span></a>
+                                            {% endif %}
+                                        </div>
+                                        {% if app_user.resume.educations.all %}
+
+                                            {% for item in app_user.resume.educations.all %}
+                                        <div class="panel-body wt-panel-body p-a20 ">
+
+                                            <div class="panel-heading wt-panel-heading panel-heading-with-btn ">
+                                            <div class="twm-panel-inner">
+                                                
+                                                
+                                                <p><b>{{ item.education }}</b></p>
+                                                <p>{{ item.date_from }} to {{ item.date_to }}</p>
+                                                <p>{{ item.course }}</p>
+                                                <p>{{ item.institution }}</p>
+                                                
+                                            </div>
+
+                                            <a href="{% url 'resume:edit_education' item.id %}" role="button" title="Edit" class="site-text-primary">
+                                                <span class="fa fa-edit"></span>
+                                            </a>
+
+                                            </div>       
+                                        </div>
+                                    
+                                        {% endfor %}
+                                            {% else %}
+                                            <div class="panel-body wt-panel-body p-a20 ">
+                                                <p>No Education to show</p>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+
+                                        
+
+                                    <!--IT Skills-->
+                                    <div class="panel panel-default mb-3">
+                                        <div class="panel-heading wt-panel-heading p-a20 panel-heading-with-btn ">
+                                            <h4 class="panel-tittle m-a0">Skills</h4>
+                                            {% if app_user.resume.skills.all %}
+                                            <a href="{% url 'resume:add_skill' %}" role="button" title="Add Skill" class="site-text-primary"><span class="fa fa-plus-square"></span></a>
+                                            {% for item in app_user.resume.skills.all %}
+
+                                        {% endfor %}
+                                            {% else %}
+                                            <a href="{% url 'resume:add_skill' %}" role="button" title="Add Skill" class="site-text-primary"><span class="fa fa-plus-square"></span></a>
+                                            {% endif %}
+                                            
+                                        </div>
+                                        <div class="panel-body wt-panel-body p-a20 ">
+                                            <div class="twm-panel-inner">
+                                                {% if app_user.resume.skills.all %}
+                                                        {% for item in app_user.resume.skills.all %}
+                                                <div class="table-responsive">
+
+                                                    <table class="table twm-table table-striped table-borderless">
+                                                    
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Skill</th>
+                                                            <th>Level</th>
+                                                            <th>Start Date</th>
+                                                            <th>Experience</th>
+                                                            <th>Edit</th>
+                                                        </tr>
+                                                    </thead>
+                                                    
+                                
+                                                    <tbody>
+                                                    
+                                                        <tr>
+                                                            <td>{{ item.skill }}</td>
+                                                            <td>{{ item.detail }}</td>
+                                                            <td>{{ item.date_from }}</td>
+                                                            <td>{{ item.date_to }} years</td>
+                                                            <td>
+                                                                <a href="{% url 'resume:edit_skill' item.id %}" role="button" title="Edit Skills" class="site-text-primary">
+                                                                    <span class="fa fa-edit"></span>
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                    
+                                                        
+                                                        
+                                                    </tbody>
+                                                    </table>
+                                                </div>
+                                                {% endfor %}
+                                                        {% else %}
+                                                            <p>No Skill to show</p>
+                                                            
+                                                    {%endif %}
+                                            </div>       
+                                        </div>
+                                    
+
+                                        <!--IT_skills -->
+                                        
+
+                                    </div>
+
+                                    <!--Project-->
+                                
+                                    <div class="panel panel-default mb-3">
+                                        <div class="panel-heading wt-panel-heading p-a20 panel-heading-with-btn ">
+                                            <h4 class="panel-tittle m-a0">Career</h4>
+                                            {% if app_user.resume.careers.all %}
+                                            <a href="{% url 'resume:add_career' %}" role="button" title="Add Career" class="site-text-primary"><span class="fa fa-plus-square"></span></a>
+                                            {% for item in app_user.resume.careers.all %}
+
+                                        {% endfor %}
+                                            {% else %}
+                                            <a href="{% url 'resume:add_career' %}" role="button" title="Add Career" class="site-text-primary"><span class="fa fa-plus-square"></span></a>
+                                            {% endif %}
+                                        </div>
+                                        {% if app_user.resume.careers.all %}
+
+                                        {% for item in app_user.resume.careers.all %}
+                                        
+                                        <div class="panel-body wt-panel-body p-a20 ">
+
+                                            
+                                            <div class="panel-heading wt-panel-heading panel-heading-with-btn ">
+                                            
+                                            <div class="twm-panel-inner">
+
+                                                <p><b>{{ item.career }}</b></p>
+                                                <p>{{ item.date_from }} to {{ item.date_to }}</p>
+                                                <p>{{ item.detail }}</p>
+                                            </div>
+                                            <a href="{% url 'resume:edit_career' item.id %}" role="button" title="Edit" class="site-text-primary">
+                                                <span class="fa fa-edit"></span>
+                                            </a>
+                                        </div>
+                                        {% endfor %}
+                                            {% else %}
+                                            <div class="panel-body wt-panel-body p-a20 ">
+                                            <div class="twm-panel-inner">
+                                                <p><b>No Career Added Yet</b></p>
+                                              </div>  
+                                            </div>       
+                                        
+
+                                        {% endif %}
+
+
+                                    </div>
+
+                                    <!--Desired Career Profile-->
+                                    <div class="panel panel-default mb-3">
+                                        <div class="panel-heading wt-panel-heading p-a20 panel-heading-with-btn ">
+                                            <h4 class="panel-tittle m-a0">Awards & Certifications</h4>
+                                            {% if app_user.resume.awards.all %}
+                                            <a href="{% url 'resume:add_award' %}" role="button" title="Add Awards and Certifications" class="site-text-primary"><span class="fa fa-plus-square"></span></a>
+                                            {% for item in app_user.resume.awards.all %}
+
+                                        {% endfor %}
+                                            {% else %}
+                                            <a href="{% url 'resume:add_award' %}" role="button" title="Add Awards and Certifications" class="site-text-primary"><span class="fa fa-plus-square"></span></a>
+                                            {% endif %}
+                                        </div>
+                                        <div class="panel-body wt-panel-body p-a20 ">
+                                            <div class="twm-panel-inner">
+                                                <div class="row">
+                                                    {% if app_user.resume.awards.all %}
+
+                                                        {% for item in app_user.resume.awards.all %}
+                                                    <div class="col-md-6">
+                                                        <div class="twm-s-detail-section">
+                                                            <div class="twm-title"><a href="{{ item.link }}">{{ item.award }}</a><a  href="{% url 'resume:edit_award' item.id %}" role="button" title="Edit {{ item.award }}" class="site-text-primary">
+                                                                <span class="fa fa-edit"></span>
+                                                            </a></div>
+                                                            <span class="twm-s-info-discription">{{ item.detail }}</span>
+                                                            <p>{{ item.year }}</p>
+                                                        </div>
+                                                    </div>
+                                                    {% endfor %}
+                          
+                                                            {% else %}
+                                                        <p>Sorry, nothing here to see!</p>
+                                                    {% endif %}
+
+                                                </div>
+                                            </div>       
+                                        </div>
+
+                                        <!--Desired Career Profile -->
+                                        
+
+                                    </div>
+
+                                    <!--Personal Details-->
+                                    <div class="panel panel-default mb-3">
+                                        <div class="panel-heading wt-panel-heading p-a20 panel-heading-with-btn ">
+                                            <h4 class="panel-tittle m-a0">Personal Details</h4>
+                                            <a  href="{% url 'app_user:update_appuser' %}" role="button" title="Edit" class="site-text-primary">
+                                                <span class="fa fa-edit"></span>
+                                            </a>
+                                        </div>
+                                        <div class="panel-body wt-panel-body p-a20 ">
+                                            <div class="twm-panel-inner">
+                                                <div class="row">
+
+                                                    <div class="col-md-6">
+                                                        <div class="twm-s-detail-section">
+                                                            <div class="twm-title">Date of Birth</div>
+                                                            <span class="twm-s-info-discription">{{ app_user.age }}</span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="twm-s-detail-section">
+                                                            <div class="twm-title">Permanent Address</div>
+                                                            <span class="twm-s-info-discription">{{ app_user.address }}</span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="twm-s-detail-section">
+                                                            <div class="twm-title">Gender</div>
+                                                            <span class="twm-s-info-discription">{{ app_user.gender }}</span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="twm-s-detail-section">
+                                                            <div class="twm-title">Pin Code</div>
+                                                            <span class="twm-s-info-discription">{{ app_user.postcode }}</span>
+                                                        </div>
+                                                    </div>
+
+                                                    
+
+                                                    <div class="col-md-6">
+                                                        <div class="twm-s-detail-section">
+                                                            <div class="twm-title">Hometown</div>
+                                                            <span class="twm-s-info-discription">{{ app_user.city }}</span>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="col-md-6">
+                                                        <div class="twm-s-detail-section">
+                                                            <div class="twm-title">Languages</div>
+                                                            <span class="twm-s-info-discription">{{ app_user.language }}</span>
+                                                        </div>
+                                                    </div>
+
+                                                    
+
+                                                </div>
+
+                                            </div>       
+                                        </div>
+                                    </div>
+
+                                    <!--Personal Details-->
+                                    <div class="panel panel-default mb-3">
+                                        <div class="panel-heading wt-panel-heading p-a20 panel-heading-with-btn ">
+                                            <h4 class="panel-tittle m-a0">Social Links</h4>
+                                            <a  href="{% url 'app_user:update_appuser' %}" role="button" title="Edit" class="site-text-primary">
+                                                <span class="fa fa-edit"></span>
+                                            </a>
+                                        </div>
+                                        <div class="panel-body wt-panel-body p-a20 ">
+                                            <div class="twm-panel-inner">
+                                                <div class="row">
+
+                                                    <div class="col-md-4 col-6">
+                                                        <div class="twm-s-detail-section">
+                                                            <div class="twm-title"><a target="_blank" href="{{ app_user.facebook_link }}"><i class="fs-input-icon fab fa-facebook-f"></i> Facebook</a></div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-4 col-6">
+                                                        <div class="twm-s-detail-section">
+                                                            <div class="twm-title"><a target="_blank" href="{{ app_user.twitter_link }}"><i class="fs-input-icon fab fa-twitter"></i> Twitter</a></div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-4 col-6">
+                                                        <div class="twm-s-detail-section">
+                                                            <div class="twm-title"><a target="_blank" href="{{ app_user.linkedin_link }}"><i class="fs-input-icon fab fa-linkedin-in"></i> LinkedIn</a></div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-4 col-6">
+                                                        <div class="twm-s-detail-section">
+                                                            <div class="twm-title"><a target="_blank" href="{{ app_user.discord_link }}"><i class="fs-input-icon fab fa-discord"></i> Discord</a></div>
+                                                        </div>
+                                                    </div>
+
+                                                    
+
+                                                    <div class="col-md-4 col-6">
+                                                        <div class="twm-s-detail-section">
+                                                            <div class="twm-title"><a target="_blank" href="{{ app_user.instagram_link }}"><i class="fs-input-icon fab fa-instagram"></i> Instagram</a></div>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="col-md-4 col-6">
+                                                        <div class="twm-s-detail-section">
+                                                            <div class="twm-title"><a target="_blank" href="{{ app_user.github_link }}"><i class="fs-input-icon fab fa-github"></i> Github</a></div>
+                                                        </div>
+                                                    </div>
+
+                                                    
+
+                                                </div>
+
+                                            </div>       
+                                        </div>
+                                    </div>
+                                </div>
+
+                                    
+
+                                    <!--Accomplishments-->
+                                    <div class="panel panel-default mb-3">
+
+                                        <div class="panel-heading wt-panel-heading p-a20 panel-heading-with-btn ">
+                                            <h4 class="panel-tittle m-a0">Accomplishments & Project</h4>
+                                            {% if app_user.resume.projects.all %}
+                                            <a href="{% url 'resume:add_project' %}" role="button" title="Add Project" class="site-text-primary"><span class="fa fa-plus-square"></span></a>
+                                            {% for item in app_user.resume.projects.all %}
+
+                                        {% endfor %}
+                                            {% else %}
+                                            <a href="{% url 'resume:add_project' %}" role="button" title="Add Project" class="site-text-primary"><span class="fa fa-plus-square"></span></a>
+                                            {% endif %}
+                                        </div>
+                                        
+                                        <div class="panel-body wt-panel-body p-a20 ">
+                                            {% if app_user.resume.projects.all %}
+
+                                            {% for item in app_user.resume.projects.all %}
+                                            <div class="twm-panel-inner">
+                                                <div class="twm-list-wrap">
+                                                    <div class="twm-list-inner d-flex justify-content-between">
+                                                        <b><a target="_blank" href="{{ item.link }}">{{ item.project}}</a></b> 
+                                                        <a href="{% url 'resume:edit_project' item.id %}" role="button" title="Edit" class="site-text-primary">
+                                                         <span class="fa fa-edit"></span>
+                                                        </a>
+
+                                                    </div>
+                                                    <p>{{ item.detail }}</p>
+                                                </div>
+                                            </div>
+                                                {% endfor %}
+
+
+                                                {% else %}
+                                                
+                                                    <p>Tell us about projects you've worked on
+                                                        
+                                                    
+                                                {% endif %}
+                                                <!--Online Profile Modal -->
+                                                
+
+                                            </div>       
+                                        </div>
+
+                                    </div>
+    
+                                </div>
+                               
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>   
+            <!-- OUR BLOG END -->
+          
+            
+     
+        </div>
+        <!-- CONTENT END -->
+
+        <script type="text/javascript">
+
+let element = document.querySelector(".tagcloud");
+
+let content = element.textContent;
+
+let elementArray = content.split(",");
+
+let links = elementArray.map(function(element) {
+  return "<a href='javascript:void(0)'>" + element + "</a>";
+});
+
+let separatedLinks = links.join("");
+
+element.innerHTML = separatedLinks;
+</script>
+
+{% endblock %}

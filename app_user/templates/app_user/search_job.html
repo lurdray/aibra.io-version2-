@@ -1,0 +1,86 @@
+{% extends 'app_user/auth_base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+{% include "app_user/header2.html" %}
+
+
+    <!-- JOB POST START -->
+    <div class="section-full p-t120 p-b90 site-bg-gray twm-bg-ring-wrap2">
+        <div class="twm-bg-ring-right"></div>
+        <div class="twm-bg-ring-left"></div>
+        <div class="container">
+
+            <div class="wt-separator-two-part">
+                <div class="row wt-separator-two-part-row">
+                    <div class="col-xl-6 col-lg-6 col-md-12 wt-separator-two-part-left">
+                        <!-- TITLE START-->
+                        <div class="section-head left wt-small-separator-outer">
+                            <div class="wt-small-separator site-text-primary">
+                            <div style="color:#24695c">All Jobs Post</div>                                
+                            </div>
+                            <h2 class="wt-title">Find Your Career You Deserve it</h2>
+                        </div>                  
+                        <!-- TITLE END-->
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-12 wt-separator-two-part-right text-right">
+                        <a href="job-list.html" class="site-button" style="background-color:#24695c">Browse All Jobs</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section-content">
+                <div class="twm-jobs-grid-wrap">
+                    <div class="row">
+                        {% for item in jobs %}
+                            <div class="col-lg-4 col-md-6">
+                                <div class="twm-jobs-grid-style1  m-b30">
+                                    <div class="twm-media">
+                                        <img src="{{ item.app_user.agency_logo.url }}" alt="#">
+                                    </div>
+                                    <span class="twm-job-post-duration">{{ item.pub_date }}</span>
+                                    <div class="twm-jobs-category green"><span class="twm-bg-green">{{ item.job_type }}</span></div>
+                                    <div class="twm-mid-content">
+                                        <a href="{% url 'job:job_detail' item.id %}" class="twm-job-title">
+                                            <h4>{{ item.title }}</h4>
+                                        </a>
+                                        <p class="twm-job-address">{{ item.description|truncatewords:20 }}...</p>
+                                        <a target="_blank" href="{{ item.website }}" class="twm-job-websites site-text-primary">{{ item.website }}</a>
+                                    </div>
+                                    <div class="twm-right-content">
+                                        
+                                        <div class="twm-jobs-amount">${{ item.salary }} <span>/ Month</span></div>
+                                        <a href="{% url 'job:job_detail' item.id %}" class="twm-jobs-browse site-text-primary">Browse Job</a>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                    <script type="text/javascript">
+                        const element = document.querySelector('.twm-job-post-duration');
+const dateString = element.innerHTML;
+const date = Date.parse(dateString);
+const now = Date.now();
+const diff = date.getTime() - now;
+const days = diff / 86400000;
+const daysRounded = Math.round(days);
+
+if (daysRounded >= 0) {
+  console.log(`${daysRounded} days ago`);
+} else {
+  console.log(`in ${Math.abs(daysRounded)} days`);
+}
+                    </script>
+                    
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    <!-- JOB POST END -->
+
+
+{% endblock %}

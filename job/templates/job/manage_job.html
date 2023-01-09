@@ -1,0 +1,130 @@
+{% extends 'app_user/auth_base.html' %}
+{% load static %}
+{% load humanize %}
+
+
+{% block content %}
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="notification is-toast alert alert-{{message.tags}} text-center" role="alert" style="background-color: red; color: #fff; border-radius: 6px; font-weight: 600; z-index: 1;">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+
+{% include "app_user/header.html" %}
+{% include "app_user/sidebar.html" %}
+
+            <!-- OUR BLOG START -->
+            
+        <div id="content">
+
+            <div class="content-admin-main">
+
+                <div class="wt-admin-right-page-header clearfix">
+                    <h2>Manage Jobs</h2>
+                    <div class="breadcrumbs"><a href="#">Home</a><a href="#">Dasboard</a><span>Change Password</span></div>
+                </div>
+                
+
+                <div class="container">
+                    <div class="row">
+                        
+                        {% include "app_user/sidebar.html" %}
+
+                        <div class="col-xl-1 col-lg-2 col-md-12 m-b30">
+                        </div>
+
+                        <div class="col-xl-10 col-lg-8 col-md-12 m-b30">
+                            <!--Filter Short By-->
+                            <div class="twm-right-section-panel site-bg-gray">
+                                <form>
+                                    <!--Basic Information-->
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading wt-panel-heading p-a20">
+                                            <h4 class="panel-tittle m-a0"><i class="fa fa-suitcase"></i>Manage jobs</h4>
+                                        </div>
+                                        <div class="panel-body wt-panel-body m-b30 ">
+                                            <div class="twm-D_table p-a20 table-responsive">
+                                                <table id="jobs_bookmark_table" class="table table-bordered twm-bookmark-list-wrap">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Job Title</th>
+                                                            <th>Category</th>
+                                                            <th>Job Types</th>
+                                                            
+                                                            <th>Date</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <!--1-->
+                                                        {% if jobs %}
+                                                            {% for item in jobs %}
+                                                        <tr>
+                                                            <td>
+                                                                <div class="twm-bookmark-list">
+                                                                    
+                                                                    <div class="twm-mid-content">
+                                                                        <a href="#" class="twm-job-title">
+                                                                            <h4>{{ item.title }}</h4>
+                                                                            
+                                                                        </a>
+                                                                        
+                                                                    </div>
+                                                                    
+                                                                </div>
+                                                            </td>
+                                                            
+                                                            <td>{{ item.category }}</td>
+                                                            <td><div class="twm-jobs-category"><span class="twm-bg-green">{{ item.job_type }}</span></div></td>
+                                                            
+                                                            <td>
+                                                                <span class="text-clr-green2">{{ item.pub_date }}</span>
+                                                            </td>
+                                                            
+                                                            <td>
+                                                                <div class="twm-table-controls">
+                                                                    <ul class="twm-DT-controls-icon list-unstyled">
+                                                                        <li>
+                                                                            <a href="{% url 'job:job_applications' item.id %}" title="See Who Applied" type="button" data-bs-toggle="tooltip" data-bs-placement="top">
+                                                                                <span class="fa fa-eye"></span>
+                                                                            </a>
+                                                                        </li>
+                                                                        
+                                                                        <li>
+                                                                            <a href="{% url 'job:edit_job' item.id %}" title="Edit" type="button" data-bs-toggle="tooltip" data-bs-placement="top">
+                                                                                <span class="fa fa-edit"></span>
+                                                                            </a>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        {% endfor %}
+                                                        {% else %}
+                                                            <p>Sorry, nothing here to see!</p>
+                                                        {% endif %}
+                                                        
+                                                        
+                                                    </tbody>
+                                                    
+                                                </table>
+                                            </div>             
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>   
+            <!-- OUR BLOG END -->
+          
+            
+     
+        </div>
+        <!-- CONTENT END -->
+{% endblock %}

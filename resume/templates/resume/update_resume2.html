@@ -1,0 +1,230 @@
+{% extends 'app_user/auth_base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="notification is-toast alert alert-{{message.tags}} text-center" role="alert" style="background-color: red; color: #fff; border-radius: 6px; font-weight: 600; z-index: 1;">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+
+{% include "app_user/header.html" %}
+{% include "app_user/sidebar.html" %}
+
+            <div id="content">
+
+            <div class="content-admin-main">
+
+            
+
+            <!-- Employer Account START -->
+            <div class="section-full p-t120  p-b90 site-bg-white bg-cover twm-ac-fresher-wrap" 
+            style="background-image:url({% static 'assets/images/background/pattern.jpg' %})">
+                <span class="twm-section-bg-img">
+                    <img src="images/reg-bg2.png" alt="">
+                </span>
+
+                <div class="container">
+                    <div class="row d-flex justify-content-center">
+                        
+                        <div class="col-lg-8 col-md-12">
+                            <div class="twm-right-section-panel-wrap2">
+                                <!--Filter Short By-->
+                                <div class="twm-right-section-panel " style="border: solid 1px #24695c;">
+                                    
+                                    <!--Basic Information-->
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading wt-panel-heading p-a20">
+                                            <h4 class="panel-tittle m-a0">Work Experience</h4>
+                                        </div>
+                                        <div class=" wt-panel-body p-a20 ">
+
+                                            
+
+                                            <div class="twm-tabs-style-1" >
+                                                
+                                                <div class="tab-content" id="myTab3Content">
+                                                    
+                                                    <form class="" method="post">
+                                                            {% csrf_token %}
+                                                        <div class="tab-pane fade show active" id="Employment">
+                                                        <div class="row">
+                                                            
+
+                                                            <div class="col-xl-6 col-lg-6 col-md-12">
+                                                                <div class="form-group">
+                                                                    <label>Current Desination*</label>
+                                                                    <div class="ls-inputicon-box"> 
+                                                                        <input class="form-control" name="work_experience" type="text" placeholder="Your Job Title">
+                                                                        <i class="fs-input-icon fa fa-address-card "></i>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-xl-6 col-lg-6 col-md-12">
+                                                                <div class="form-group">
+                                                                    <label>Current Company*</label>
+                                                                    <div class="ls-inputicon-box"> 
+                                                                        <input class="form-control" name="company" type="text" placeholder="Where you are currently working">
+                                                                        <i class="fs-input-icon fas fa-building"></i>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            
+
+                                                            
+
+
+                                                            <div class="col-xl-12 col-lg-12">
+                                                                <div>
+                                                                    
+                                                                    <div class="row">
+
+                                                                        <div class="col-xl-6 col-lg-6">
+                                                                            <div class="form-group">
+                                                                                <label>Working Since</label>
+                                                                                <div class="ls-inputicon-box">  
+                                                                                    <select class="wt-select-box selectpicker"  data-live-search="true" title="" id="s-Year_1" data-bv-field="size" name="date_from">
+                                                                                        
+                                                                                        <option value="2000">2000</option>
+                                                                                        <option value="2001">2001</option>
+                                                                                        <option value="2002">2002</option>
+                                                                                        <option value="2003">2003</option>
+                                                                                        <option value="2004">2004</option>
+                                                                                        <option value="2005">2005</option>
+                                                                                        <option value="2006">2006</option>
+                                                                                        <option value="2007">2007</option>
+                                                                                        <option value="2008">2008</option>
+                                                                                        <option value="2009">2009</option>
+                                                                                        <option value="2010">2010</option>
+                                                                                        <option value="2011">2011</option>
+                                                                                        <option value="2012">2012</option>
+                                                                                        <option value="2013">2013</option>
+                                                                                        <option value="2014">2014</option>
+                                                                                        <option value="2015">2015</option>
+                                                                                        <option value="2016">2016</option>
+                                                                                        <option value="2017">2017</option>
+                                                                                        <option value="2018">2018</option>
+                                                                                        <option value="2019">2019</option>
+                                                                                        <option value="2020">2020</option>
+                                                                                        <option value="2021">2021</option>
+                                                                                        <option value="2022">2022</option>
+                                                                                    </select>
+                                                                                    <i class="fs-input-icon fa fa-calendar"></i>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="col-xl-6 col-lg-6">
+                                                                            <div class="form-group">
+                                                                                <label>Exited at</label>
+                                                                                <div class="ls-inputicon-box">  
+                                                                                    <select class="wt-select-box selectpicker"  data-live-search="true" title="" id="s-Year_1" data-bv-field="size" name="date_to">
+                                                                                        <option value="2000">2000</option>
+                                                                                        <option value="2001">2001</option>
+                                                                                        <option value="2002">2002</option>
+                                                                                        <option value="2003">2003</option>
+                                                                                        <option value="2004">2004</option>
+                                                                                        <option value="2005">2005</option>
+                                                                                        <option value="2006">2006</option>
+                                                                                        <option value="2007">2007</option>
+                                                                                        <option value="2008">2008</option>
+                                                                                        <option value="2009">2009</option>
+                                                                                        <option value="2010">2010</option>
+                                                                                        <option value="2011">2011</option>
+                                                                                        <option value="2012">2012</option>
+                                                                                        <option value="2013">2013</option>
+                                                                                        <option value="2014">2014</option>
+                                                                                        <option value="2015">2015</option>
+                                                                                        <option value="2016">2016</option>
+                                                                                        <option value="2017">2017</option>
+                                                                                        <option value="2018">2018</option>
+                                                                                        <option value="2019">2019</option>
+                                                                                        <option value="2020">2020</option>
+                                                                                        <option value="2021">2021</option>
+                                                                                        <option value="2022">2022</option>
+                                                                                    </select>
+                                                                                    <i class="fs-input-icon fa fa-calendar"></i>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-xl-12 col-lg-12">
+                                                                <div class="form-group">
+                                                                    
+                                                                    <div class="row twm-form-radio-inline">
+                                                                        
+                                                                        <div class="col-md-6">
+                                                                            <input class="form-check-input" type="radio" name="current_date" id="flexRadioDefault1">
+                                                                            <label class="form-check-label" for="flexRadioDefault1">
+                                                                               Currently Work Here 
+                                                                            </label>
+                                                                        </div>
+
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-xl-12 col-lg-12 col-md-12">
+                                                                <div class="form-group">
+                                                                    <label>Role</label>
+                                                                    <div class="ls-inputicon-box input_fields_custom"> 
+                                                                        <input class="form-control" name="detail" type="text" placeholder="describe your role..">
+                                                                        <i class="fs-input-icon fa fa-user"></i>
+                                                                    </div>
+                                                                    
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-xl-12 col-lg-12 col-md-12">                                  
+                                                                <div class="text-left">
+                                                                    <button type="submit" class="site-button">Update Work Experience</button>
+                                                                </div>
+                                                            </div> 
+                                                            
+                                                        
+                                                        </div>
+                                                    </div>
+                                                </form>
+
+                                                            
+
+                                                                                                   
+                                                        
+                                                        </div>
+                                                    </div>
+
+                                                    
+
+
+                                                    
+                                                </div>
+                                            </div>  
+
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>   
+             <!-- Employer Account START END -->
+          
+            
+     
+        </div>
+        <!-- CONTENT END -->
+
+    {% endblock %}

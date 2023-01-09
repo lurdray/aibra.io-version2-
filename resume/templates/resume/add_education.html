@@ -1,0 +1,197 @@
+{% extends 'app_user/auth_base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="notification is-toast alert alert-{{message.tags}} text-center" role="alert" style="background-color: red; color: #fff; border-radius: 6px; font-weight: 600; z-index: 1;">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+
+{% include "app_user/header.html" %}
+{% include "app_user/sidebar.html" %}
+
+            <div id="content">
+
+            <div class="content-admin-main">
+
+            
+
+            <!-- Employer Account START -->
+            <div class="section-full p-t120  p-b90 site-bg-white bg-cover twm-ac-fresher-wrap" 
+            style="background-image:url({% static 'assets/images/background/pattern.jpg' %})">
+                <span class="twm-section-bg-img">
+                    <img src="images/reg-bg2.png" alt="">
+                </span>
+
+                <div class="container">
+                    <div class="row d-flex justify-content-center">
+                        
+                        <div class="col-lg-8 col-md-12">
+                            <div class="twm-right-section-panel-wrap2">
+                                <!--Filter Short By-->
+                                <div class="twm-right-section-panel " style="border: solid 1px #24695c;">
+                                    
+                                    <!--Basic Information-->
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading wt-panel-heading p-a20">
+                                            <h4 class="panel-tittle m-a0">Education</h4>
+                                        </div>
+                                        <div class=" wt-panel-body p-a20 ">
+
+                                            
+
+                                            <div class="twm-tabs-style-1" >
+                                                
+                                                <div class="tab-content" id="myTab3Content">
+                                                    
+                                                    <form class="" method="post">
+                                                            {% csrf_token %}
+                                                        <div class="tab-pane fade show active" id="Employment">
+                                                        <div class="row">
+                                                            
+
+                                                            <div class="col-xl-12 col-lg-12 col-md-12">
+                                                                <div class="form-group">
+                                                                    <label>Education</label>
+                                                                        <div class="ls-inputicon-box">  
+                                                                            <select name="education" class="wt-select-box selectpicker"  data-live-search="true" title=""  data-bv-field="size">
+                                                                                <option class="bs-title-option" value="">Select Category</option>
+                                                                                <option value="Graduation/Diploma">Graduation/Diploma</option>
+                                                                                <option value="Masters/Post-Graduation">Masters/Post-Graduation</option>
+                                                                            </select>
+                                                                            <i class="fs-input-icon fa fa-user-graduate"></i>
+                                                                        </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-xl-12 col-lg-12">
+                                                                    <div class="form-group">
+                                                                        <label>Course</label>
+                                                                        <div class="ls-inputicon-box">  
+                                                                            <select name="course" class="wt-select-box selectpicker"  data-live-search="true" title=""  data-bv-field="size">
+                                                                                <option class="bs-title-option" value="">Select Course</option>
+                                                                                <option value="BBA- Bachelor of Business Administration">BBA- Bachelor of Business Administration</option>
+                                                                                <option value="BFA- Bachelor of Fine Arts">BFA- Bachelor of Fine Arts</option>
+                                                                                <option value="BSW- Bachelor of Social Work">BSW- Bachelor of Social Work</option>
+                                                                            </select>
+                                                                            <i class="fs-input-icon fa fa-book"></i>
+                                                                        </div>
+                                                                    </div>
+                                                            </div>
+
+                                                            <div class="col-xl-12 col-lg-12">
+                                                                    <div class="form-group">
+                                                                        <label>University/Institute</label>
+                                                                        <div class="ls-inputicon-box">  
+                                                                            <select name="institution" class="wt-select-box selectpicker"  data-live-search="true" title=""  data-bv-field="size">
+                                                                                <option class="bs-title-option" value="">Select University</option>
+                                                                                <option value="University of Cambridge">University of Cambridge</option>
+                                                                                <option value="Stanford University">Stanford University</option>
+                                                                                <option value="Imperial College London">Imperial College London</option>
+                                                                            </select>
+                                                                            <i class="fs-input-icon fas fa-book-reader"></i>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                            
+
+                                                            
+
+                                                            
+
+
+                                                            <div class="col-xl-12 col-lg-12">
+                                                                <div>
+                                                                    
+                                                                    <div class="row">
+
+                                                                        <div class="col-xl-6 col-lg-6">
+                                                                            <div class="form-group">
+                                                                                <label>Date Joined</label>
+                                                                                <div class="ls-inputicon-box"> 
+                                                                                    <input class="form-control datepicker" data-provide="datepicker" name="date_from" type="text" placeholder="mm/dd/yyyy">
+                                                                                    <i class="fs-input-icon far fa-calendar"></i>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="col-xl-6 col-lg-6">
+                                                                            <div class="form-group">
+                                                                                <label>Date Left</label>
+                                                                                <div class="ls-inputicon-box"> 
+                                                                                    <input class="form-control datepicker" data-provide="datepicker" name="date_to" type="text" placeholder="mm/dd/yyyy">
+                                                                                    <i class="fs-input-icon far fa-calendar"></i>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-xl-12 col-lg-12">
+                                                                <div class="form-group">
+                                                                    
+                                                                    <div class="row twm-form-radio-inline">
+                                                                        
+                                                                        <div class="col-md-6">
+                                                                            <input class="form-check-input" type="radio" name="current_date" id="flexRadioDefault1">
+                                                                            <label class="form-check-label" for="flexRadioDefault1">
+                                                                               Still a Student 
+                                                                            </label>
+                                                                        </div>
+
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            
+
+                                                            <div class="col-xl-12 col-lg-12 col-md-12">                                  
+                                                                <div class="text-left">
+                                                                    <button type="submit" class="site-button">Add Education</button>
+                                                                </div>
+                                                            </div> 
+                                                            
+                                                        
+                                                        </div>
+                                                    </div>
+                                                </form>
+
+                                                            
+
+                                                                                                   
+                                                        
+                                                        </div>
+                                                    </div>
+
+                                                    
+
+
+                                                    
+                                                </div>
+                                            </div>  
+
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>   
+             <!-- Employer Account START END -->
+          
+            
+     
+        </div>
+        <!-- CONTENT END -->
+
+    {% endblock %}

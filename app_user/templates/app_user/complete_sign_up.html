@@ -1,0 +1,106 @@
+{% extends 'app_user/auth_base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="notification is-toast alert alert-{{message.tags}} text-center" role="alert" style="background-color: red; color: #fff; border-radius: 6px; font-weight: 600; z-index: 1;">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+
+           
+            
+
+            <!-- Login Section Start -->
+            <div class="section-full site-bg-white">
+                
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-xl-4 col-lg-6 col-md-5 twm-log-reg-media-wrap" style="background-color: #ffffff">
+                            
+                                    <img src="{% static 'assets/img/4673526.jpg' %}" alt="">
+                                
+                        </div>
+                        <div class="col-xl-4 col-lg-6 col-md-7">
+                            <div class="twm-log-reg-form-wrap">
+                                <div class="twm-log-reg-logo-head">
+                                    <a href="/">
+                                        <img src="https://aibra.io/static/main/images/aibra4.png" alt="" class="logo">
+                                    </a> 
+                                </div>
+
+                                <div class="twm-log-reg-inner">
+                                    <div class="twm-log-reg-head">
+                                        <div class="twm-log-reg-logo">
+                                            <span class="log-reg-form-title">Authenticate OTP</span>
+                                        </div>
+                                    </div>
+                                    <div class="twm-tabs-style-2">
+                                        <form class="" method="post">
+                                            {% csrf_token %}
+                                        
+                                        
+                                        <div class="tab-content" id="myTab2Content">
+                                            <!--Login Candidate Content-->  
+                                            <div class="tab-pane fade show active" id="twm-login-candidate">
+                                                <div class="row">
+
+                                                    <div class="col-lg-12 col-md-12">
+                                                            <div class="form-group">
+                                                                <label>Input OTP</label>
+                                                                <div class="ls-inputicon-box"> 
+                                                                    <input class="form-control wt-form-control" name="otp" type="password" placeholder="">
+                                                                    <i class="fs-input-icon fa fa-asterisk "></i>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    
+                                                    
+                                                    
+                                                    <div class="col-lg-12">
+                                                        <div class="twm-forgot-wrap">
+                                                            <div class="form-group mb-3">
+                                                                <div class="form-check">
+                                                                    <input type="checkbox" class="form-check-input" id="Password4">
+                                                                    <label class="form-check-label rem-forgot" for="Password4">Remember me <a href="javascript:;" class="site-text-primary">Forgot Password</a></label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <button type="submit" class="site-button">Submit</button>
+                                                        </div>
+                                                    </div>     
+                                                </div>
+                                            </div>
+                                            <!--Login Employer Content--> 
+                                        </div>
+                                    </form>
+                                        
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-6 col-md-5 twm-log-reg-media-wrap" style="background-color: #ffffff">
+                            
+                                    <img src="{% static 'assets/img/4673526.jpg' %}" alt="">
+                                
+                        </div>
+                    </div>
+                </div>
+            </div>   
+            <!-- Login Section End -->
+          
+            
+     
+        </div>
+        <!-- CONTENT END -->
+
+{% endblock %}

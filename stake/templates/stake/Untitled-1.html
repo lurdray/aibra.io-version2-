@@ -1,0 +1,116 @@
+{% extends 'app_user/auth_base.html' %}
+{% load static %}
+{% load humanize %}
+
+
+{% block content %}
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="notification is-toast alert alert-{{message.tags}} text-center" role="alert" style="background-color: red; color: #fff; border-radius: 6px; font-weight: 600; z-index: 1;">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+
+<style type="text/css">
+    .ls-inputicon-box img{
+     position: absolute !important;
+     margin-top: 15px !important;
+     left: 0;
+     top: 0 !important;
+     width: 30px !important;
+     height: 30px !important;
+     z-index: 5;
+     line-height: 40px !important;
+     text-align: center !important;
+     font-size: 16px;
+     color: #24695c;
+    } 
+</style>
+
+{% include "app_user/header.html" %}
+
+{% include "app_user/sidebar.html" %}
+
+            <div id="content">
+
+            <div class="content-admin-main">
+            <div class
+            ="twm-sign-up">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content" style="max-width: 450px !important;">
+                    
+                        <form method="POST">
+                            {% csrf_token %}
+                            <div class="modal-header">
+                                <h2 class="modal-title" id="sign_up_popupLabel2">Stake Aibra</h2>
+                                <p>Stake ABR to recieve ABR</p>
+                                
+                            </div>
+                            <div class="modal-body">
+                                <div class="twm-tabs-style-2">
+                                    
+                                    
+                                    <div class="tab-content" id="">
+                                        <!--Login Candidate Content-->  
+                                        <div class="tab-pane fade show active" id="login-candidate">
+                                            <div class="row">
+
+                                                <div class="col-lg-12">
+                                                    <div class="form-group mb-3">
+                                                         <label>Balance: {{ brise_balance|floatformat:3|intcomma }} ABR</label>
+                                                        <input min="100000" name="amount" type="text" required="" class="form-control" placeholder="e.g 1000000000">
+                                                    </div>
+                                                </div>
+                                                <small>minimum stake: 100,000.00 ABR</small>
+                                                
+                                                
+                                                
+                                                
+                                                <div class="col-lg-12">
+                                                    <div class="form-group mb-3">
+                                                        <div class=" form-check">
+                                                            <input type="checkbox" checked class="form-check-input" id="Password3">
+                                                            <label class="form-check-label rem-forgot">Stake Duration:  <a href="javascript:;">60days</a></label>
+                                                            
+                                                        </div>
+                                                        <div class=" form-check">
+                                                            <input type="checkbox" checked class="form-check-input" id="Password3">
+                                                            <label class="form-check-label rem-forgot">Exchange rate:  <a href="javascript:;">1 ABR = 1 ABR</a></label>
+                                                            
+                                                        </div>
+                                                        <div class=" form-check">
+                                                            <input type="checkbox" checked class="form-check-input" id="Password3">
+                                                            <label class="form-check-label rem-forgot">Staking Fee:  <a href="javascript:;">1%</a></label>
+                                                            
+                                                        </div>
+                                                        <div class=" form-check">
+                                                            <input type="checkbox" checked class="form-check-input" id="Password3">
+                                                            <label class="form-check-label rem-forgot">Return:  <a href="javascript:;">10%</a></label>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <button type="submit" class="site-button">Proceed</button>
+                                                    
+                                                </div>
+
+                                                
+                                                
+                                            </div>
+                                        </div>
+                                        
+                                    
+                                    </div>
+                                </div> 
+                            </div>
+                            
+                        </form>
+                    </div>
+                </div>
+            </div>
+        <!--Model Popup Section End-->
+
+{% endblock %}

@@ -1,0 +1,163 @@
+{% extends 'app_user/auth_base.html' %}
+{% load static %}
+{% load humanize %}
+
+
+{% block content %}
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="notification is-toast alert alert-{{message.tags}} text-center" role="alert" style="background-color: red; color: #fff; border-radius: 6px; font-weight: 600; z-index: 1;">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+
+{% include "app_user/header.html" %}
+{% include "app_user/sidebar.html" %}
+
+            <div id="content">
+
+            <div class="content-admin-main">
+
+            
+
+
+            
+                
+
+                <div class="container">
+                    <div class="row">
+                        
+                        
+
+                        <div class="col-lg-12 col-md-12">
+                            <!--Filter Short By-->
+                            <div class="product-filter-wrap d-flex justify-content-between align-items-center m-b30">
+                                <span class="woocommerce-result-count-left">Showing 2,150 jobs</span>
+                               
+                                <form class="woocommerce-ordering twm-filter-select" method="get">
+                                    <span class="woocommerce-result-count">Short By</span>
+                                    <select class="wt-select-bar-2 selectpicker"  data-live-search="true" data-bv-field="size">
+                                        <option>Most Recent</option>
+                                        <option>Freelance</option>
+                                        <option>Full Time</option>
+                                        <option>Internship</option>
+                                        <option>Part Time</option>
+                                        <option>Temporary</option>
+                                    </select>
+                                    <select class="wt-select-bar-2 selectpicker"  data-live-search="true" data-bv-field="size">
+                                        <option>Show 10</option>
+                                        <option>Show 20</option>
+                                        <option>Show 30</option>
+                                        <option>Show 40</option>
+                                        <option>Show 50</option>
+                                        <option>Show 60</option>
+                                    </select>
+                                </form>
+
+                            </div>
+
+                            <div class="row">
+                                <!--Block one-->
+                                {% if my_stakes %}
+                    				{% for item in my_stakes %}
+                                <div class="col-lg-4 col-md-12 m-b30">
+
+                                    <div class="twm-jobs-grid-style1">
+                                        <div class="twm-media">
+                                            <img src="images/jobs-company/pic1.jpg" alt="#">
+                                        </div>
+                                        <span class="twm-job-post-duration">{{ item.pub_date }}</span>
+                                        <div class="twm-jobs-category green"><span class="twm-bg-green">{{ item.duration }} days</span></div>
+                                        <div class="twm-mid-content">
+                                            <a href="job-detail.html" class="twm-job-title">
+                                                <h4>Ammount Staked : {{ item.amount|floatformat:3|intcomma }} ABR<br /><small>(1% Fee: {{ item.amount_tax|floatformat:4|intcomma }}abr )</small></h4>
+                                            </a>
+                                            <p class="twm-job-address">Return: {% if item.duration == 60 %}
+                                        								{{ return_checker }}
+                                      										{% else %}
+                                        									None%
+                                      									{% endif %}
+                                      		</p>
+
+                                      		<p class="twm-job-address">Expected Return: {{ item.returns|floatformat:4|intcomma }} ABR <small>
+                                      			(3% Fee: {{ item.returns_tax|floatformat:4|intcomma }}abr )
+                                      		</small>
+                                      		</p> 
+                                            
+                                        </div>
+                                        <div class="twm-right-content">
+                                            
+                                            <div class="twm-jobs-amount">Unstake Date <span>{{ item.due_date }}</span></div>
+                                            <a href="{% url 'staking:request_payment' item.id %}" class="twm-jobs-browse site-text-primary">Unstake</a>
+                                            <a href="{% url 'staking:index' %}" class="twm-jobs-browse site-text-primary">Stake</a>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                {% endfor %}
+                    			{% else %}
+
+                    			<div class="col-lg-4 col-md-12 m-b30">
+
+
+                                    
+
+                                </div>
+                                
+                                <!--Block two-->
+                                <div class="col-lg-4 col-md-12 m-b30">
+
+
+                                    <div class="twm-jobs-grid-style1">
+                                        
+
+
+
+                                        <div class="twm-mid-content">
+                                            <a href="job-detail.html" class="twm-job-title">
+                                                <h4>Senior Rolling Stock Technician</h4>
+                                            </a>
+                                            <p class="twm-job-address">Sorry, you do not have any stakes. Click button below to stake Aibra</p>
+                                            
+                                        </div>
+                                        <div class="twm-right-content">
+                                            
+                                            <a href="{% url 'staking:index' %}" class=" ftr-nw-subcribe-btn twm-jobs-browse site-text-primary">Stake Now</a>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                {% endif %}  
+                                
+                                
+                                
+
+                            </div>
+
+                            <div class="pagination-outer">
+                                <div class="pagination-style1">
+                                    <ul class="clearfix">
+                                        <li class="prev"><a href="javascript:;"><span> <i class="fa fa-angle-left"></i> </span></a></li>
+                                        <li><a href="javascript:;">1</a></li>
+                                        <li class="active"><a href="javascript:;">2</a></li>
+                                        <li><a href="javascript:;">3</a></li>
+                                        <li><a class="javascript:;" href="javascript:;"><i class="fa fa-ellipsis-h"></i></a></li>
+                                        <li><a href="javascript:;">5</a></li>
+                                        <li class="next"><a href="javascript:;"><span> <i class="fa fa-angle-right"></i> </span></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>   
+            <!-- OUR BLOG END -->
+
+        </div>
+        <!-- CONTENT END -->
+
+{% endblock %}

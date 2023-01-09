@@ -1,0 +1,144 @@
+{% extends 'app_user/auth_base.html' %}
+{% load static %}
+{% load humanize %}
+
+
+{% block content %}
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="notification is-toast alert alert-{{message.tags}} text-center" role="alert" style="background-color: red; color: #fff; border-radius: 6px; font-weight: 600; z-index: 1;">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+{% include "app_user/header.html" %}
+{% include "app_user/sidebar.html" %}
+
+
+
+<!-- Page Content Holder -->
+        <div id="content">
+
+            <div class="content-admin-main">
+
+                <div class="wt-admin-right-page-header clearfix">
+                    <h2>Asign Recruiter</h2>
+                    <div class="breadcrumbs"><a href="#">Home</a><span>Dasboard</span></div>
+                </div>
+
+                
+
+                <div class="twm-pro-view-chart-wrap">
+                    <div class="row">
+                        
+                        
+
+                        
+
+                        
+
+                        <div class="col-lg-12 col-md-12 mb-4">
+                            <div class="panel panel-default">
+                                <div class="panel-heading wt-panel-heading p-a20">
+                                    <h4 class="panel-tittle m-a0">Recent Applicants</h4>
+                                </div>
+                                <div class="panel-body wt-panel-body bg-white">
+                                    <div class="twm-dashboard-candidates-wrap">
+                                        <div class="row">
+                                            <div class="col-xl-3 col-lg-12 col-md-12">
+                                            </div>
+                                        	
+                                            <div class="col-xl-6 col-lg-12 col-md-12">
+                                                 <div class="twm-dash-candidates-list">
+                                                     <div class="twm-media">
+                                                         <div class="twm-media-pic">
+                                                            <img src="{{ recruiter.agency_logo.url }}" alt="#">
+                                                         </div>
+                                                         
+                                                     </div>
+                                                     <div class="twm-mid-content">
+                                                         <a href="" class="twm-job-title">
+                                                             <h4>{{ recruiter.agency_name }} </h4>
+                                                         </a>
+                                                     	
+                                                         
+                                                         <p><small>{{ recruiter.bio }}</small></p>
+                                                         
+                                                         <div class="twm-fot-content">
+                                                             <div class="twm-left-info">
+                                                                <p class="twm-candidate-address"><i class="feather-map-pin"></i>{{ recruiter.country }}</p>
+                                                                <div class="twm-jobs-vacancies">{{ recruiter.charge }} <span>ABR</span></div>
+                                                             </div>
+                                                             
+                                                            
+                                                        </div>
+                                                         <form method="post">
+                        {% csrf_token %}
+                        <button class="btn btn-primary text-center" type="submit">Assign</button>
+                        <br />
+                        <small>Clicking the "assign" button will send <b>({{ recruiter.charge }} ABR)</b>
+                            to this recruiter, hence allowing them connect you to the perfect candidates.
+                        </small>
+                      </form>
+                                                     </div>
+                                                     
+                                                 </div>
+                                            </div>
+                                            
+
+                                        </div>
+                                    </div>              
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+                                                      
+            </div>
+
+    	</div>
+
+        <!--Delete Profile Popup-->
+        <div class="modal fade twm-model-popup" id="delete-dash-profile" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"  aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h4 class="modal-title">Do you want to delete your profile?</h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="site-button" data-bs-dismiss="modal">No</button>
+                    <button type="button" class="site-button outline-primary">Yes</button>
+                </div>
+            </div>
+            </div>
+        </div>
+
+
+        <!--Logout Profile Popup-->
+        <div class="modal fade twm-model-popup" id="logout-dash-profile" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h4 class="modal-title">Do you want to Logout your profile?</h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="site-button" data-bs-dismiss="modal">No</button>
+                    <button type="button" class="site-button outline-primary">Yes</button>
+                </div>
+            </div>
+            </div>
+        </div>
+          
+
+	</div>
+
+{% endblock %}

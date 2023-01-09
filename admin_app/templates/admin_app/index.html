@@ -1,0 +1,312 @@
+{% extends 'app_user/auth_base.html' %}
+{% load static %}
+{% load humanize %}
+
+
+{% block content %}
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="notification is-toast alert alert-{{message.tags}} text-center" role="alert" style="background-color: red; color: #fff; border-radius: 6px; font-weight: 600; z-index: 1;">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+
+{% include "app_user/header.html" %}
+{% include "app_user/sidebar.html" %}
+
+            <!-- OUR BLOG START -->
+            
+        <div id="content">
+
+            <div class="content-admin-main">
+
+                <div class="wt-admin-right-page-header clearfix">
+                    <h2 style="text-align: center;">Manage Stakings</h2>
+                    
+                </div>
+                
+
+                <div class="container">
+                    <div class="row">
+                        
+                        
+
+                        
+
+                        <div class="col-xl-12 col-lg-12 col-md-12 m-b30">
+                            <!--Filter Short By-->
+                            <div class="twm-right-section-panel site-bg-gray">
+                                <form>
+                                    <!--Basic Information-->
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading wt-panel-heading p-a20">
+                                            <h4 class="panel-tittle m-a0"><i class="fa fa-suitcase"></i>UNSTAKED</h4>
+                                        </div>
+                                        <div class="panel-body wt-panel-body m-b30 ">
+                                            <div class="twm-D_table p-a20 table-responsive">
+                                                <table id="jobs_bookmark_table" class="table table-bordered twm-bookmark-list-wrap">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Date</th>
+                                                            <th>Staker</th>
+                                                            <th>Stakes</th>
+                                                            <th>Returns</th>
+                                                            <th>Due Date</th>
+                                                            <th>Request Status</th>
+                                                            <th>Payment Status</th>
+                                                        </tr>
+                                                    </thead>
+                                                    
+                                                    <tbody>
+                                                        <!--1-->
+                                                        {% if stakes %}
+
+                                                            {% for item in stakes_done %}
+                                                        <tr>
+                                                            <td>
+                                                                <div class="twm-bookmark-list">
+                                                                    
+                                                                    <div class="twm-mid-content">
+                                                                        <a href="#" class="twm-job-title">
+                                                                            <h4>{{ item.pub_date }}</h4>
+                                                                            
+                                                                        </a>
+                                                                        
+                                                                    </div>
+                                                                    
+                                                                </div>
+                                                            </td>
+                                                            
+                                                            <td>{{ item.app_user.user.username }}</td>
+                                                            <td><div class="twm-jobs-category"><span class="twm-bg-green">{{ item.amount }}</span></div></td>
+                                                            <td><div class="twm-jobs-category"><span class="twm-bg-green">{{ item.returns }}</span></div></td>
+                                                            <td><div class="twm-jobs-category"><span class="twm-bg-green">{{ item.due_date }}</span></div></td>
+                                                            
+                                                            <td>
+                                                                <span class="text-clr-green2">{{ item.request_payment_status }}</span>
+                                                            </td>
+                                                            
+                                                            <td>
+                                                                <div class="twm-table-controls">
+                                                                    <ul class="twm-DT-controls-icon list-unstyled">
+                                                                        <li>
+                                                                             {{ item.closed_status }}
+                                                                            <a href="{% url 'admin_app:staking_detail' item.id %}" title="Confirm Request" type="button" data-bs-toggle="tooltip" data-bs-placement="top">
+                                                                                <span class="fa fa-eye"></span>
+                                                                            </a>
+                                                                        </li>
+                                                                        
+                                                                        <li>
+                                                                            <button title="Delete" data-bs-toggle="tooltip" data-bs-placement="top">
+                                                                                <span class="far fa-trash-alt"></span>
+                                                                            </button>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        {% endfor %}
+                                                        {% else %}
+                                                        
+                                                        {% endif %}    
+                                                    </tbody>
+                                                    
+                                                </table>
+                                            </div>             
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+
+                        <div class="col-xl-12 col-lg-12 col-md-12 m-b30">
+                            <!--Filter Short By-->
+                            <div class="twm-right-section-panel site-bg-gray">
+                                <form>
+                                    <!--Basic Information-->
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading wt-panel-heading p-a20">
+                                            <h4 class="panel-tittle m-a0"><i class="fa fa-suitcase"></i>Requested</h4>
+                                        </div>
+                                        <div class="panel-body wt-panel-body m-b30 ">
+                                            <div class="twm-D_table p-a20 table-responsive">
+                                                <table id="jobs_bookmark_table" class="table table-bordered twm-bookmark-list-wrap">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Date</th>
+                                                            <th>Staker</th>
+                                                            <th>Stakes</th>
+                                                            <th>Returns</th>
+                                                            <th>Due Date</th>
+                                                            <th>Request Status</th>
+                                                            <th>Payment Status</th>
+                                                        </tr>
+                                                    </thead>
+                                                    
+                                                    <tbody>
+                                                        <!--1-->
+                                                    {% if stakes %}
+
+                                                        {% for item in stakes_request %} 
+                                                        <tr>
+                                                            <td>
+                                                                <div class="twm-bookmark-list">
+                                                                    
+                                                                    <div class="twm-mid-content">
+                                                                        <a href="#" class="twm-job-title">
+                                                                            <h4>{{ item.pub_date }}</h4>
+                                                                            
+                                                                        </a>
+                                                                        
+                                                                    </div>
+                                                                    
+                                                                </div>
+                                                            </td>
+                                                            
+                                                            <td>{{ item.app_user.user.username }}</td>
+                                                            <td><div class="twm-jobs-category"><span class="twm-bg-green">{{ item.amount }}</span></div></td>
+                                                            <td><div class="twm-jobs-category"><span class="twm-bg-green">{{ item.returns }}</span></div></td>
+                                                            <td><div class="twm-jobs-category"><span class="twm-bg-green">{{ item.due_date }}</span></div></td>
+                                                            
+                                                            <td>
+                                                                <span class="text-clr-green2">{{ item.request_payment_status }}</span>
+                                                            </td>
+                                                            
+                                                            <td>
+                                                                <div class="twm-table-controls">
+                                                                    <ul class="twm-DT-controls-icon list-unstyled">
+                                                                        <li>
+                                                                             {{ item.closed_status }}
+                                                                            <a href="" title="Confirm Request" type="button" data-bs-toggle="tooltip" data-bs-placement="top">
+                                                                                <span class="fa fa-eye"></span>
+                                                                            </a>
+                                                                        </li>
+                                                                        
+                                                                        <li>
+                                                                            <button title="Delete" data-bs-toggle="tooltip" data-bs-placement="top">
+                                                                                <span class="far fa-trash-alt"></span>
+                                                                            </button>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                            {% endfor %}
+                                                        {% else %}
+
+                                                    {% endif %}
+                                                           
+                                                    </tbody>
+                                                    
+                                                </table>
+                                            </div>             
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+
+                        <div class="col-xl-12 col-lg-12 col-md-12 m-b30">
+                            <!--Filter Short By-->
+                            <div class="twm-right-section-panel site-bg-gray">
+                                <form>
+                                    <!--Basic Information-->
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading wt-panel-heading p-a20">
+                                            <h4 class="panel-tittle m-a0"><i class="fa fa-suitcase"></i>All Stakes</h4>
+                                        </div>
+                                        <div class="panel-body wt-panel-body m-b30 ">
+                                            <div class="twm-D_table p-a20 table-responsive">
+                                                <table id="jobs_bookmark_table" class="table table-bordered twm-bookmark-list-wrap">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Date</th>
+                                                            <th>Staker</th>
+                                                            <th>Stakes</th>
+                                                            <th>Returns</th>
+                                                            <th>Due Date</th>
+                                                            <th>Request Status</th>
+                                                            <th>Payment Status</th>
+                                                        </tr>
+                                                    </thead>
+                                                    
+                                                    <tbody>
+                                                        <!--1-->
+                                                    {% if stakes %}
+
+                                                        {% for item in stakes %} 
+                                                        <tr>
+                                                            <td>
+                                                                <div class="twm-bookmark-list">
+                                                                    
+                                                                    <div class="twm-mid-content">
+                                                                        <a href="#" class="twm-job-title">
+                                                                            <h4>{{ item.pub_date }}</h4>
+                                                                            
+                                                                        </a>
+                                                                        
+                                                                    </div>
+                                                                    
+                                                                </div>
+                                                            </td>
+                                                            
+                                                            <td>{{ item.app_user.user.username }}</td>
+                                                            <td><div class="twm-jobs-category"><span class="twm-bg-green">{{ item.amount }}</span></div></td>
+                                                            <td><div class="twm-jobs-category"><span class="twm-bg-green">{{ item.returns }}</span></div></td>
+                                                            <td><div class="twm-jobs-category"><span class="twm-bg-green">{{ item.due_date }}</span></div></td>
+                                                            
+                                                            <td>
+                                                                <span class="text-clr-green2">{{ item.request_payment_status }}</span>
+                                                            </td>
+                                                            
+                                                            <td>
+                                                                <div class="twm-table-controls">
+                                                                    <ul class="twm-DT-controls-icon list-unstyled">
+                                                                        <li>
+                                                                             {{ item.closed_status }}
+                                                                            <a href="" title="Confirm Request" type="button" data-bs-toggle="tooltip" data-bs-placement="top">
+                                                                                <span class="fa fa-eye"></span>
+                                                                            </a>
+                                                                        </li>
+                                                                        
+                                                                        <li>
+                                                                            <button title="Delete" data-bs-toggle="tooltip" data-bs-placement="top">
+                                                                                <span class="far fa-trash-alt"></span>
+                                                                            </button>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                            {% endfor %}
+                                                        {% else %}
+
+                                                    {% endif %}
+                                                           
+                                                    </tbody>
+                                                    
+                                                </table>
+                                            </div>             
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+
+
+
+                    </div>
+                </div>
+            </div>   
+            <!-- OUR BLOG END -->
+          
+            
+     
+        </div>
+        <!-- CONTENT END -->
+{% endblock %}

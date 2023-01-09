@@ -1,0 +1,108 @@
+{% extends 'app_user/auth_base.html' %}
+{% load static %}
+{% load humanize %}
+
+
+{% block content %}
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="notification is-toast alert alert-{{message.tags}} text-center" role="alert" style="background-color: red; color: #fff; border-radius: 6px; font-weight: 600; z-index: 1;">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+
+{% include "app_user/header.html" %}
+
+
+{% include "app_user/sidebar.html" %}
+
+<!--Page Content Holder -->
+        <div id="content">
+
+            <div class="content-admin-main">
+
+
+                <div class="wt-admin-right-page-header clearfix">
+                    <h2 style="text-align:center;">All Requests</h2>
+                    
+                </div>
+                
+
+                <div class="container">
+                    <div class="row">
+                        
+                        
+
+                        <div class="col-lg-12 col-md-12">
+                            
+
+                            <div class="twm-candidates-grid-wrap">
+                                <div class="row">
+                                    {% if all_requests %}
+                                    {% for item in all_requests %}
+                                	
+                                    <div class="col-lg-4 col-md-4">
+                                         <div class="twm-candidates-grid-style1 mb-5">
+                                             <div class="twm-media">
+                                                 <div class="twm-media-pic">
+                                                    <img src="{{ item.app_user.agency_logo.url }}" alt="#">
+                                                 </div>
+                                                 <div class="twm-candidates-tag"><span>{{ item.title }}</span></div>
+                                             </div>
+                                             <div class="twm-mid-content">
+                                                 
+                                                 <p>{{ item.app_user.agency_name }}</p>
+                                                 <p style="text-align: left;">{{ item.description|safe }}</p>
+                                                 <a href="{% url 'job:add_job_fr' item.id %}" class="twm-view-prifile site-text-primary">Create Job</a>
+                                                 
+                                                 <div class="twm-fot-content">
+                                                     <div class="twm-left-info">
+                                                        <p class="twm-candidate-address"><i class="fa fa-suitcase"></i>Job Type</p>
+                                                        <div class="twm-jobs-vacancies">{{ item.job_type }}</div>
+                                                     </div>
+                                                     <hr>
+                                                     <div class="twm-left-info">
+                                                        <p class="twm-candidate-address"><i class="fa fa-money-bill-alt"></i>Salary</p>
+                                                        <div class="twm-jobs-vacancies"><span>{{ item.salary }}</span></div>
+                                                     </div>
+                                                     <hr>
+                                                     <div class="twm-left-info">
+                                                        <p class="twm-candidate-address"><i class="fa fa-user-tie"></i>Available Position</p>
+                                                        <div class="twm-jobs-vacancies"><span>{{ item.slots }}</span></div>
+                                                     </div>
+                                                     <hr>
+                                                     <div class="twm-left-info">
+                                                        <p class="twm-candidate-address"><i class="fa fa-calendar"></i>Deadline</p>
+                                                        <div class="twm-jobs-vacancies"><span>{{ item.deadline }}</span></div>
+                                                     </div>
+                                                    
+                                                </div>
+                                             </div>
+                                             
+                                         </div>
+                                    </div>
+                                    {% endfor %}
+                                    {% else %}
+                                        <p style="text-align: center;">Sorry, you've not received any requests yet</p>
+                                    {% endif %} 
+
+
+                                </div>
+                            </div>
+
+                            
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>   
+            <!-- OUR BLOG END -->
+    
+        </div>
+        <!-- CONTENT END -->
+
+
+{% endblock %}

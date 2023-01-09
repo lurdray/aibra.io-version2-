@@ -1,0 +1,257 @@
+{% extends 'app_user/auth_base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="notification is-toast alert alert-{{message.tags}} text-center" role="alert" style="background-color: red; color: #fff; border-radius: 6px; font-weight: 600; z-index: 1;">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+
+{% include "app_user/header.html" %}
+
+{% include "app_user/sidebar.html" %}
+
+<!--Page Content Holder -->
+        <div id="content">
+
+            <div class="content-admin-main">
+
+
+                <div class="wt-admin-right-page-header clearfix">
+                    <h2>User Detail</h2>
+                    <div class="breadcrumbs"><a href="#">Dasboard</a><span>Change Password</span></div>
+                </div>
+
+                <!--Change Pawssword-->
+                <div class="container">
+                
+                    <!-- BLOG SECTION START -->
+                    <div class="section-content">
+                        <div class="row d-flex justify-content-center">
+                        
+                            <div class="col-lg-8 col-md-12">
+                                <!-- Candidate detail START -->
+                                <div class="cabdidate-de-info">
+                                    <div class="twm-candi-self-wrap overlay-wraper" style="background-image:url({% static 'assets/images/candidates/candidate-bg.jpg' %});">
+                                        <div class="overlay-main site-bg-primary opacity-01"></div>
+                                        <div class="twm-candi-self-info">
+                                            <div class="twm-candi-self-top">
+                                                <div class="twm-candi-fee">${{ recruit.current_salary }}/year</div>
+                                                <div class="twm-media">
+                                                    <img src="{{ app_user.profile_photo.url }}" alt="#">
+                                                </div>
+                                                <div class="twm-mid-content">
+                                                    
+                                                    <h4 class="twm-job-title">{{ recruit.user.first_name }} {{ recruit.user.last_name }}</h4>
+                                                    
+                                                    <p>{{ app_user.resume.titles.first }}</p>
+                                                    <p class="twm-candidate-address"><i class="feather-map-pin"></i>{{ app_user.country }}</p>
+                                                    
+                                                </div>
+                                            </div>
+                                            <div class="twm-candi-self-bottom">
+                                                <a href="javascript:;" class="site-button outline-white">Hire Me Now</a>
+                                                <a href="{{ app_user.cv.url }}" class="site-button secondry">Download CV</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <h4 class="twm-s-title">About Me</h4>
+
+                                    <p>{{ recruit.resume.opening_statements.all.0 }}</p>
+
+                                    
+
+                                    <h4 class="twm-s-title">Skills</h4>
+
+                                    <div class="tw-sidebar-tags-wrap">
+                                        <div class="tagcloud">
+                                        	{% for item in recruit.resume.hobbies.all %}
+                                            <a href="javascript:void(0)">{{ item.hobby }}</a>
+                                            
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+
+                                    <h4 class="twm-s-title">Work Experience</h4>
+                                    <div class="twm-timing-list-wrap">
+                                    	{% for item in recruit.resume.work_experiences.all %}
+                                        <div class="twm-timing-list">
+                                            <div class="twm-time-list-date">{{ item.date_from }} to {{ item.date_to }}</div>
+                                            <div class="twm-time-list-title">{{ item.company }}</div>
+                                            <div class="twm-time-list-position">{{ item.work_experience }}</div>
+                                            <div class="twm-time-list-discription">
+                                                <p>{{ item.detail }}</p>
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+
+                                    </div>
+
+                                    <h4 class="twm-s-title">Education & Training</h4>
+                                    <div class="twm-timing-list-wrap">
+                                    	{% for item in recruit.resume.educations.all %}
+                                        <div class="twm-timing-list">
+                                            <div class="twm-time-list-date">{{ item.date_from }} to {{ item.date_to }}</div>
+                                            <div class="twm-time-list-title">{{ item.course}}</div>
+                                            <div class="twm-time-list-position">{{ item.institution }}</div>
+                                            <div class="twm-time-list-discription">
+                                                <p>{{ item.education }}</p>
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+
+                                    </div>
+
+                                    <h4 class="twm-s-title">Career</h4>
+                                    <div class="twm-timing-list-wrap">
+                                    	{% for item in recruit.resume.careers.all %}
+                                        <div class="twm-timing-list">
+                                            <div class="twm-time-list-date">{{ item.date_from }} to {{ item.date_to }}</div>
+                                            <div class="twm-time-list-title">{{ item.career }}</div>
+                                            <div class="twm-time-list-position">{{ item.detail }}</div>
+                                            
+                                        </div>
+                                        {% endfor %}
+
+                                    </div>
+
+                                    <h4 class="twm-s-title">Projects/Accomplishments</h4>
+                                    <div class="twm-timing-list-wrap">
+                                    	{% for item in recruit.resume.projects.all %}
+                                        <div class="twm-timing-list">
+                                            <div class="twm-time-list-date">{{ item.link }}</div>
+                                            <div class="twm-time-list-title">{{ item.project }}</div>
+                                            <div class="twm-time-list-position">{{ item.detail }}</div>
+                                            
+                                        </div>
+                                        {% endfor %}
+
+                                    </div>
+                                    <style type="text/css">
+                                    	.disc-clr {
+  											background-color: #36393F !important;
+											}
+
+										.insta-clr {
+  											background-color: #d62976;
+											}
+
+										.git-clr {
+  											background-color: #171515;
+											}
+                                    </style>
+
+                                    <h4 class="twm-s-title">Socials</h4>
+                                    <div class="twm-social-tags">
+                                        <a href="{{ recruit.facebook_link }}" class="fb-clr">Facebook</a>
+                                        <a href="{{ recruit.twitter_link }}" class="tw-clr">Twitter</a>
+                                        <a href="{{ recruit.linkedin_link }}" class="link-clr">Linkedin</a>                                            
+                                        <a href="{{ recruit.instagram_link }}" class="insta-clr">Instagram</a>
+                                        <a href="{{ recruit.discord_link }}" class="disc-clr">Discord</a>
+                                        <a href="{{ recruit.github_link }}" class="git-clr">Github</a>
+                                    </div>
+
+
+                                </div>
+                                                           
+                            </div>
+                            
+                            <div class="col-lg-4 col-md-12 rightSidebar">
+
+                                <div class="side-bar-2">
+    
+                                    
+
+
+                                    <div class="twm-s-info-wrap mb-5">
+                                        <h4 class="section-head-small mb-4">Profile Info</h4> 
+                                        <div class="twm-s-info">
+                                            <ul>
+
+                                                <li>
+                                                    <div class="twm-s-info-inner">
+                                                        <i class="fas fa-money-bill-wave"></i>
+                                                        <span class="twm-title">Offered Salary</span>
+                                                        <div class="twm-s-info-discription">${{ recruit.current_salary }} / year</div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="twm-s-info-inner">
+                                                        <i class="fas fa-clock"></i>
+                                                        <span class="twm-title">Experience</span>
+                                                        <div class="twm-s-info-discription">{{ recruit.experience }}</div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="twm-s-info-inner">
+                                                        <i class="fas fa-venus-mars"></i>
+                                                        <span class="twm-title">Gender</span>
+                                                        <div class="twm-s-info-discription">{{ recruit.gender }}</div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="twm-s-info-inner">
+                                                        <i class="fas fa-mobile-alt"></i>
+                                                        <span class="twm-title">Phone</span>
+                                                        <div class="twm-s-info-discription">{{ recruit.phone_no }}</div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="twm-s-info-inner">
+                                                        <i class="fas fa-at"></i>
+                                                        <span class="twm-title">Email</span>
+                                                        <div class="twm-s-info-discription">{{ recruit.user.email }}</div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="twm-s-info-inner">
+                                                        <i class="fas fa-book-reader"></i>
+                                                        <span class="twm-title">Qualification</span>
+                                                        <div class="twm-s-info-discription">{{ recruit.job_category}}</div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="twm-s-info-inner">
+                                                        
+                                                        <i class="fas fa-map-marker-alt"></i>
+                                                        <span class="twm-title">Address</span>
+                                                        <div class="twm-s-info-discription">{{ recruit.address }}</div>
+                                                    </div>
+                                                </li>
+
+                                            </ul>
+                                            
+                                        </div>
+                                    </div>
+    
+                                    
+
+                                    
+                                                
+                                            
+    
+                                    
+                                </div>
+    
+    
+                            </div>
+                        
+                        </div>
+                                                
+                    </div>
+                    
+                </div>
+                
+            </div>   
+            <!-- OUR BLOG END -->          
+            
+     
+        </div>
+        <!-- CONTENT END -->
+
+{% endblock %}

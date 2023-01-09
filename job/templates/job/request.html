@@ -1,0 +1,199 @@
+{% extends 'app_user/auth_base.html' %}
+{% load static %}
+{% load humanize %}
+
+
+{% block content %}
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="notification is-toast alert alert-{{message.tags}} text-center" role="alert" style="background-color: red; color: #fff; border-radius: 6px; font-weight: 600; z-index: 1;">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+{% include "app_user/header.html" %}
+{% include "app_user/sidebar.html" %}
+
+<!--Page Content Holder -->
+        <div id="content">
+
+            <div class="content-admin-main">
+
+
+                <div class="wt-admin-right-page-header clearfix">
+                    <h2>Request Job</h2>
+                    <div class="breadcrumbs"><a href="#">Dashboard</a><span>Change Password</span></div>
+                </div>
+                
+
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-xl-12 col-lg-12 col-md-12 m-b30">
+                            <!--Filter Short By-->
+                            <div class="twm-right-section-panel site-bg-gray">
+                                <form method="post">
+                                    {% csrf_token %}
+                                   <!--Basic Information-->
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading wt-panel-heading p-a20">
+                                            <h4 class="panel-tittle m-a0"><i class="fa fa-suitcase"></i>Job Details</h4>
+                                        </div>
+                                        <div class="panel-body wt-panel-body p-a20 m-b30 ">
+                                            
+                                            <div class="row">
+                                                    <!--Job title-->            
+                                                    <div class="col-xl-4 col-lg-6 col-md-12">
+                                                        <div class="form-group">
+                                                            <label>Job Title</label>
+                                                            <div class="ls-inputicon-box"> 
+                                                                <input class="form-control" name="title" type="text" placeholder="Devid Smith">
+                                                                <i class="fs-input-icon fa fa-address-card"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                
+                                                    <!--Job Category--> 
+                                                    <div class="col-xl-4 col-lg-6 col-md-12">
+                                                        <div class="form-group city-outer-bx has-feedback">
+                                                            <label>Job Category</label>
+                                                            <div class="ls-inputicon-box">  
+                                                                <select class="wt-select-box selectpicker"  data-live-search="true" title="" id="j-category" data-bv-field="size" name="category">
+                                                                    <option disabled selected value="">Select Category</option>
+                                                                    <option value="Accounting and Finance">Accounting and Finance</option>
+                                                                    <option value="Clerical and Data Entry">Clerical &amp; Data Entry</option>
+                                                                    <option value="Court Administration">Court Administration</option>
+                                                                    <option value="Human Resources">Human Resources</option>
+                                                                    <option value="Investigative">Investigative</option>
+                                                                    <option value="IT and Computers">IT and Computers</option>
+                                                                    <option value="Law Enforcement">Law Enforcement</option>
+                                                                    <option value="Management">Management</option>
+                                                                    <option value="Miscellaneous">Miscellaneous</option>
+                                                                    <option value="Public Relations">Public Relations</option>
+                                                                </select>
+                                                                <i class="fs-input-icon fa fa-border-all"></i>
+                                                            </div>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <!--Job Type--> 
+                                                    <div class="col-xl-4 col-lg-6 col-md-12">
+                                                        <div class="form-group">
+                                                            <label>Job Type</label>
+                                                            <div class="ls-inputicon-box">  
+                                                                <select class="wt-select-box selectpicker"  data-live-search="true" title="" id="s-category" data-bv-field="size" name="job_type">
+                                                                    <option class="bs-title-option" value="">Select Category</option>
+                                                                    <option value="Full Time">Full Time</option>
+                                                                    <option value="Freelance">Freelance</option>
+                                                                    <option value="Part Time">Part Time</option>
+                                                                    <option value="Internship">Internship</option>
+                                                                    <option value="hybrid">Hybrid</option>
+                                                                    <option value="Temporary">Temporary</option>
+                                                                </select>
+                                                                <i class="fs-input-icon fa fa-file-alt"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                
+                
+                                                    <!--Offered Salary--> 
+                                                    <div class="col-xl-4 col-lg-6 col-md-12">
+                                                        <div class="form-group">
+                                                            <label>Offered Salary</label>
+                                                            <div class="ls-inputicon-box">  
+                                                                <input class="form-control" name="salary" type="text" placeholder="E.g. Minimum 3 years">
+                                                                <i class="fs-input-icon fas fa-money-bill-wave"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                
+                                                    <!--Experience--> 
+                                                    <div class="col-xl-4 col-lg-6 col-md-12">
+                                                        <div class="form-group">
+                                                            <label>Experience</label>
+                                                            <div class="ls-inputicon-box"> 
+                                                                <input class="form-control" name="experience" type="text" placeholder="E.g. Minimum 3 years">
+                                                                <i class="fs-input-icon fa fa-user-edit"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                     <!--Experience--> 
+                                                    <div class="col-xl-4 col-lg-6 col-md-12">
+                                                        <div class="form-group">
+                                                            <label>Slot(s)</label>
+                                                            <div class="ls-inputicon-box"> 
+                                                                <input class="form-control" name="slots" type="text" placeholder="">
+                                                                <i class="fs-input-icon fas fa-user-tie"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!--Email Address-->
+                                                    <div class="col-xl-4 col-lg-6 col-md-12">
+                                                        <div class="form-group">
+                                                            <label>Website</label>
+                                                            <div class="ls-inputicon-box"> 
+                                                                <input class="form-control" name="website" type="text" placeholder="www.example.com">
+                                                                <i class="fs-input-icon fas fa-globe"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                
+                                                    
+                                                    <!--Start Date-->
+                                                    <div class="col-xl-4 col-lg-6 col-md-12">
+                                                        <div class="form-group">
+                                                            <label>Deadline</label>
+                                                            <div class="ls-inputicon-box"> 
+                                                                <input class="form-control datepicker" data-provide="datepicker" name="deadline" type="text" placeholder="mm/dd/yyyy">
+                                                                <i class="fs-input-icon far fa-calendar"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                
+                                                    
+                
+                                                    <!--Complete Address-->
+                                                    <div class="col-xl-4 col-lg-6 col-md-12">
+                                                        <div class="form-group">
+                                                            <label>Complete Address</label>
+                                                            <div class="ls-inputicon-box"> 
+                                                                <input class="form-control" name="address" type="text" placeholder="1363-1385 Sunset Blvd Los Angeles, CA 90026, USA">
+                                                                <i class="fs-input-icon fa fa-home"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                
+                                                <!--Description-->
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <label>Description</label>
+                                                            <textarea name="description" class="form-control" rows="3" placeholder="Greetings! We are Galaxy Software Development Company. We hope you enjoy our services and quality."></textarea>
+                                                        </div>
+                                                    </div> 
+
+                                                           
+                                                    <div class="col-lg-12 col-md-12">                                   
+                                                        <div class="text-left">
+                                                            <button type="submit" class="site-button m-r5">Request Job</button>
+                                                            
+                                                        </div>
+                                                    </div> 
+                                                                      
+                                            </div>
+                                                     
+                                        </div>
+                                    </div> 
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>   
+            <!-- OUR BLOG END -->
+
+{% endblock %}

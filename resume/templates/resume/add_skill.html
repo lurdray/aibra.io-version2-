@@ -1,0 +1,172 @@
+{% extends 'app_user/auth_base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="notification is-toast alert alert-{{message.tags}} text-center" role="alert" style="background-color: red; color: #fff; border-radius: 6px; font-weight: 600; z-index: 1;">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+
+{% include "app_user/header.html" %}
+{% include "app_user/sidebar.html" %}
+
+            <div id="content">
+
+            <div class="content-admin-main">
+
+            
+
+            <!-- Employer Account START -->
+            <div class="section-full p-t120  p-b90 site-bg-white bg-cover twm-ac-fresher-wrap" 
+            style="background-image:url({% static 'assets/images/background/pattern.jpg' %})">
+                <span class="twm-section-bg-img">
+                    <img src="images/reg-bg2.png" alt="">
+                </span>
+
+                <div class="container">
+                    <div class="row d-flex justify-content-center">
+                        
+                        <div class="col-lg-8 col-md-12">
+                            <div class="twm-right-section-panel-wrap2">
+                                <!--Filter Short By-->
+                                <div class="twm-right-section-panel " style="border: solid 1px #24695c;">
+                                    
+                                    <!--Basic Information-->
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading wt-panel-heading p-a20">
+                                            <h4 class="panel-tittle m-a0">Skill</h4>
+                                        </div>
+                                        <div class=" wt-panel-body p-a20 ">
+
+                                            
+
+                                            <div class="twm-tabs-style-1" >
+                                                
+                                                <div class="tab-content" id="myTab3Content">
+                                                    
+                                                    <form class="" method="post">
+                                                            {% csrf_token %}
+                                                        <div class="tab-pane fade show active" id="Employment">
+                                                        <div class="row">
+                                                            
+
+                                                            <div class="col-xl-12 col-lg-12 col-md-12">
+                                                                <div class="form-group">
+                                                                    <label>Skill*</label>
+                                                                    <div class="ls-inputicon-box"> 
+                                                                        <input class="form-control" name="skill" type="text" placeholder="e.g blockchain development">
+                                                                        <i class="fs-input-icon fa fa-address-card "></i>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-xl-12 col-lg-12 col-md-12">
+                                                                <div class="form-group">
+                                                                    <label>Level</label>
+                                                                    <div class="ls-inputicon-box"> 
+                                                                        <input class="form-control" name="detail" type="text" placeholder="e.g intermediate, proffesional, beginner">
+                                                                        <i class="fs-input-icon fa fa-address-card "></i>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            
+
+                                                            
+
+                                                            
+
+
+                                                            <div class="col-xl-12 col-lg-12">
+                                                                <div>
+                                                                    
+                                                                    <div class="row">
+
+                                                                        <div class="col-xl-6 col-lg-6">
+                                                                            <div class="form-group">
+                                                                                <label>Start date</label>
+                                                                                <div class="ls-inputicon-box"> 
+                                                                                    <input class="form-control datepicker" data-provide="datepicker" name="date_from" type="text" placeholder="mm/dd/yyyy">
+                                                                                    <i class="fs-input-icon far fa-calendar"></i>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="col-xl-6 col-lg-12 col-md-12">
+                                                                            <div class="form-group">
+                                                                        <label>Experience year</label>
+                                                                        <div class="ls-inputicon-box">  
+                                                                            <select class="wt-select-box selectpicker"  data-live-search="true" title="" name="date_to" data-bv-field="size">
+                                                                                <option class="bs-title-option" value="">Select years</option>
+                                                                                <option value="1">1</option>
+                                                                                <option value="2">2</option>
+                                                                                <option value="3">3</option>
+                                                                                <option value="4">4</option>
+                                                                                <option value="5">5</option>
+                                                                                <option value="6">6</option>
+                                                                                <option value="7">7</option>
+                                                                                <option value="8">8</option>
+                                                                                <option value="9">9</option>
+                                                                                <option value="10">10</option>
+                                                                                <option value="10+">10+</option>
+                                                                            </select>
+                                                                            <i class="fs-input-icon far fa-calendar"></i>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            
+
+                                                            
+
+                                                            <div class="col-xl-12 col-lg-12 col-md-12">                                  
+                                                                <div class="text-left">
+                                                                    <button type="submit" class="site-button">Add Skill</button>
+                                                                </div>
+                                                            </div> 
+                                                            
+                                                        
+                                                        </div>
+                                                    </div>
+                                                </form>
+
+                                                            
+
+                                                                                                   
+                                                        
+                                                        </div>
+                                                    </div>
+
+                                                    
+
+
+                                                    
+                                                </div>
+                                            </div>  
+
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>   
+             <!-- Employer Account START END -->
+          
+            
+     
+        </div>
+        <!-- CONTENT END -->
+
+    {% endblock %}

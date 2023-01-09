@@ -1,0 +1,71 @@
+{% extends 'app_user/auth_base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="notification is-toast alert alert-{{message.tags}} text-center" role="alert" style="background-color: red; color: #fff; border-radius: 6px; font-weight: 600; z-index: 1;">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+
+<!-- Login Section Start -->
+            <div class="section-full site-bg-white">
+                
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-xl-5 col-lg-6 col-md-7">
+                            <div class="twm-log-reg-form-wrap">
+                                <div class="twm-log-reg-logo-head">
+                                    <a href="/">
+                                        <img src="https://aibra.io/static/main/images/aibra4.png" alt="" class="logo">
+                                    </a> 
+                                </div>
+
+                                <form method="post">
+                                {% csrf_token %}
+                                <div class="twm-log-reg-inner">
+
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+    
+                                            <button type="button" class="enableEthereumButton btn">Connect Metamask</button>
+                                            <input name="wallet_address" id="wallet_address" type="hidden" value="none">
+                                            <button type="button" class="site-button sendEthButton" hidden>Pay</button>
+                                            <button type="submit" class="btn">Proceed</button>
+                                            <b><span class="showAccount"></span></b>
+    
+                                        </div>
+                                    </div>
+
+                                    
+                                    </div>
+                                </form>
+
+                                        
+                                        </div>
+                                    </div>
+                        <div class="col-xl-7 col-lg-4 col-md-5 twm-log-reg-media-wrap" style="background-color: #ffffff">
+                            
+                                    <img src="{% static 'assets/img/4673526.jpg' %}" alt="">
+                                
+                        </div>
+                        
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>   
+            <!-- Login Section End -->
+
+
+
+{% endblock %}

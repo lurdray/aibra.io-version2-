@@ -1,0 +1,454 @@
+{% extends 'app_user/auth_base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="notification is-toast alert alert-{{message.tags}} text-center" role="alert" style="background-color: red; color: #fff; border-radius: 6px; font-weight: 600; z-index: 1;">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+
+{% include "app_user/header.html" %}
+
+{% include "app_user/sidebar.html" %}
+
+<!-- Page Content Holder -->
+        <div id="content">
+
+            <div class="content-admin-main">
+
+                <div class="wt-admin-right-page-header clearfix">
+                    <h2 style="text-align: center;">Update Profile!</h2>
+                    <p style="text-align: center;">Create a profile to stand out</p>
+                </div>
+
+                <!--Change Pawssword-->
+               
+                
+                    
+                        <div class="col-xl-1 col-lg-2">
+                        </div>
+                        <div class="col-xl-12 col-lg-12 col-md-12 m-b30">
+                            <!--Filter Short By-->
+                            <div class="twm-right-section-panel site-bg-gray">
+                                <form method="post" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                
+                                    <!--Basic Information-->
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading wt-panel-heading p-a20">
+                                            <h4 class="panel-tittle m-a0">Basic Informations</h4>
+                                        </div>
+                                        <div class="panel-body wt-panel-body p-a20 m-b30 ">
+                                            
+                                            <div class="row">
+                                                
+                                                    <div class="col-xl-12 col-lg-12 col-md-12">
+                                                        
+                                                        <div class="twm-candidate-profile-pic">
+                                                            
+                                                            <img src="{{ app_user.profile_photo.url }}" alt="">
+                                                            
+                                                            <div class="upload-btn-wrapper">
+                                        
+                                                                <div id="upload-image-grid"></div>
+                                                                <button class="site-button button-sm">Upload Photo</button>
+                                                                <input type="file" name="profile_photo" id="file-uploader" accept=".jpg, .jpeg, .png">
+                                                         </div>
+                                                        </div>
+                                                        
+                                                    </div>
+
+                                                    
+                                                
+                                                    {% if app_user.account_type == "candidate" %}
+                                                    <div class="col-xl-12 col-lg-12 col-md-12">
+                                                        <div class="form-group">
+                                                            <label>Upload CV</label>
+                                                            <div class="ls-inputicon-box"> 
+                                                                <input name="cv" type="file" class="form-control">
+                                                                <i class="fs-input-icon fa fa-file "></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    {% endif %}
+
+
+                                                                
+                                                    <div class="col-xl-6 col-lg-6 col-md-12">
+                                                        <div class="form-group">
+                                                            <label>First Name</label>
+                                                            <div class="ls-inputicon-box"> 
+                                                                <input class="form-control" name="first_name" type="text" placeholder="Devid Smith" value="{{ app_user.user.first_name }}">
+                                                                <i class="fs-input-icon fa fa-user "></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-xl-6 col-lg-6 col-md-12">
+                                                        <div class="form-group">
+                                                            <label>Last Name</label>
+                                                            <div class="ls-inputicon-box"> 
+                                                                <input class="form-control" name="last_name" type="text" placeholder="Devid Smith" value="{{ app_user.user.last_name }}">
+                                                                <i class="fs-input-icon fa fa-user "></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="col-xl-6 col-lg-6 col-md-12">
+                                                        <div class="form-group">
+                                                            <label>Phone</label>
+                                                            <div class="ls-inputicon-box"> 
+                                                                <input class="form-control" name="phone" value="{{ app_user.phone_no }}" type="text" placeholder="(251) 1234-456-7890">
+                                                                <i class="fs-input-icon fa fa-phone-alt"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                
+                                                    <div class="col-xl-6 col-lg-6 col-md-12">
+                                                        <div class="form-group">
+                                                            <label>D.O.B</label>
+                                                            <div class="ls-inputicon-box"> 
+                                                                <input class="form-control datepicker" data-provide="datepicker" name="age" type="text" placeholder="mm/dd/yyyy">
+                                                                <i class="fs-input-icon far fa-calendar"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                
+                                                    
+                
+                
+                                                    
+                
+                                                    <div class="col-xl-4 col-lg-6 col-md-12">
+                                                        <div class="form-group">
+                                                            <label>Language</label>
+                                                            <div class="ls-inputicon-box"> 
+                                                                <input class="form-control" name="language" type="text" placeholder="e.x English, Spanish" value="{{app_user.language}}">
+                                                                <i class="fs-input-icon fa fa-language"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                
+                                                    <div class="col-xl-4 col-lg-6 col-md-12">
+                                                        <div class="form-group city-outer-bx has-feedback">
+                                                            <label>Job Category</label>
+                                                            <div class="ls-inputicon-box">  
+                                                                <input class="form-control" name="job_category" type="text" placeholder="IT & Software" value="{{ app_user.job_category}}">
+                                                                <i class="fs-input-icon fa fa-border-all"></i>
+                                                            </div>
+                                                            
+                                                        </div>
+                                                    </div>
+                
+                                                    <div class="col-xl-4 col-lg-6 col-md-12">
+                                                        <div class="form-group city-outer-bx has-feedback">
+                                                            <label>Experience</label>
+                                                            <div class="ls-inputicon-box">  
+                                                                <input class="form-control" name="experience" type="text" placeholder="05 Years" value="{{ app_user.experience }}">
+                                                                <i class="fs-input-icon fa fa-user-edit"></i>
+                                                            </div>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                    {% if app_user.account_type == "candidate" %}
+                                                    <div class="col-xl-6 col-lg-6 col-md-12">
+                                                        <div class="form-group city-outer-bx has-feedback">
+                                                            <label>Current Salary</label>
+                                                            <div class="ls-inputicon-box">  
+                                                                <input class="form-control" name="current_salary" type="text" placeholder="65K" value="{{ app_user.current_salary }}">
+                                                                <i class="fs-input-icon fa fa-dollar-sign"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                
+                                                    <div class="col-xl-6 col-lg-6 col-md-12">
+                                                        <div class="form-group city-outer-bx has-feedback">
+                                                            <label>Expected Salary</label>
+                                                            <div class="ls-inputicon-box">  
+                                                                <input class="form-control" name="expected_salary" type="text" placeholder="75K" value="{{ app_user.expected_salary }}">
+                                                                <i class="fs-input-icon fa fa-dollar-sign"></i>
+                                                            </div>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                    {% endif %}
+                
+                                                    <div class="col-xl-3 col-lg-12 col-md-12">
+                                                        <div class="form-group city-outer-bx has-feedback">
+                                                            <label>Gender</label>
+                                                            <div class="ls-inputicon-box">  
+                                                                
+                                                                <i class="fs-input-icon fa fa-child"></i>
+                                                                <select class="wt-select-bar-large selectpicker"  data-live-search="true" data-bv-field="size" name="gender" id="account_type">
+                                                            
+                                                                    {% if app_user.gender == "male" %}
+                                                                    <option selected value="male">male</option>
+                                                                    <option value="female">female</option>
+                                                                    {% elif app_user == "female" %}
+                                                                    <option value="male">male</option>
+                                                                    <option selected value="female">female</option>
+                                                                    {% else %}
+                                                                    <option value="male">male</option>
+                                                                    <option value="female">female</option>
+                                                                    {% endif %}
+                                                                </select>
+                                                            </div>
+                                                            
+                                                        </div>
+                                                    </div>
+                
+
+                                                    <div class="col-xl-3 col-lg-6 col-md-12">
+                                                        <div class="form-group city-outer-bx has-feedback">
+                                                            <label>Country</label>
+                                                            <div class="ls-inputicon-box">  
+                                                                <input class="form-control" name="country" value="{{ app_user.country }}" type="text" placeholder="USA">
+                                                                <i class="fs-input-icon fa fa-globe-americas"></i>
+                                                            </div>
+                                                            
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-xl-3 col-lg-6 col-md-12">
+                                                        <div class="form-group city-outer-bx has-feedback">
+                                                            <label>City</label>
+                                                            <div class="ls-inputicon-box">  
+                                                                <input class="form-control" name="city" type="text" placeholder="Texas" value="{{ app_user.city }}">
+                                                                <i class="fs-input-icon fa fa-globe-americas"></i>
+                                                            </div>
+                                                            
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-xl-3 col-lg-12 col-md-12">
+                                                        <div class="form-group city-outer-bx has-feedback">
+                                                            <label>Postcode</label>
+                                                            <div class="ls-inputicon-box">  
+                                                                <input class="form-control" name="postcode" type="text" placeholder="75462" value="{{ app_user.postcode }}">
+                                                                <i class="fs-input-icon fas fa-map-pin"></i>
+                                                            </div>
+                                                            
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="col-xl-12 col-lg-12 col-md-12">
+                                                        <div class="form-group city-outer-bx has-feedback">
+                                                            <label>Full Address</label>
+                                                            <div class="ls-inputicon-box">  
+                                                                <input class="form-control" name="address" type="text" placeholder="1363-1385 Sunset Blvd Angeles, CA 90026 ,USA" value="{{ app_user.address }}">
+                                                                <i class="fs-input-icon fas fa-map-marker-alt"></i>
+                                                            </div>
+                                                            
+                                                        </div>
+                                                    </div>
+
+
+                 
+                                                    
+                                                                                        
+                                                
+                                            </div>
+                                                    
+                                        </div>
+                                    </div>
+                                    {% if app_user.account_type == "recruiter" or app_user.account_type == "company" %}
+                                    <!--Social Network-->
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading wt-panel-heading p-a20">
+                                            <h4 class="panel-tittle m-a0">Agency Information</h4>
+                                        </div>
+                                        <div class="panel-body wt-panel-body p-a20 m-b30 ">
+                                            
+                                            <div class="row">
+                                                    <div class="col-xl-12 col-lg-12 col-md-12">
+                                                    
+                                                        <div class="twm-candidate-profile-pic">
+                                                            
+                                                            <img src="{{ app_user.agency_logo.url }}" alt="">
+                                                            
+                                                            <div class="upload-btn-wrapper">
+                                        
+                                                                <div id="upload-image-grid"></div>
+                                                                <button class="site-button button-sm">Agency Logo</button>
+                                                                <input type="file" name="agency_logo" id="file-uploader" accept=".jpg, .jpeg, .png">
+                                                         </div>
+                                                        </div>
+                                                       
+                                                    </div>
+                                                    
+                                                    <div class="col-xl-6 col-lg-6 col-md-12">
+                                                        <div class="form-group">
+                                                            <label>Agency Name</label>
+                                                            <div class="ls-inputicon-box"> 
+                                                                <input class="form-control wt-form-control" name="agency_name" value="{{ app_user.agency_name }}" type="text" placeholder="e.g Fourier Recruitment Agency">
+                                                                <i class="fs-input-icon fa fa-users"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="col-xl-6 col-lg-6 col-md-12">    
+                                                        <div class="form-group">
+                                                            <label>Charge (ABR)</label>
+                                                            <div class="ls-inputicon-box"> 
+                                                                <input class="form-control wt-form-control" name="charge" value="{{ app_user.charge }}" type="text" placeholder="https://twitter.com/">
+                                                                <i class="fs-input-icon fas fa-money-bill-wave"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="col-md-12 mb-2">
+                                                            <div class="mb-6">
+                                                            <h6 class="form-label">Bio</h6>
+                                                            <textarea name="bio" class="form-control" rows="5">{{ app_user.bio }}"</textarea>
+                                                    </div>
+                                                     
+                                            </div>
+                                                    
+                                        </div>
+                                    </div>
+                                    {% endif %}
+
+                                    <!--Social Network-->
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading wt-panel-heading p-a20">
+                                            <h4 class="panel-tittle m-a0">Social Network</h4>
+                                        </div>
+                                        <div class="panel-body wt-panel-body p-a20 m-b30 ">
+                                            
+                                            <div class="row">
+                                                    
+                                                    <div class="col-xl-4 col-lg-6 col-md-12">
+                                                        <div class="form-group">
+                                                            <label>Facebook</label>
+                                                            <div class="ls-inputicon-box"> 
+                                                                <input class="form-control wt-form-control" name="facebook_link" value="{{ app_user.facebook_link }}" type="text" placeholder="https://www.facebook.com/">
+                                                                <i class="fs-input-icon fab fa-facebook-f"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="col-xl-4 col-lg-6 col-md-12">    
+                                                        <div class="form-group">
+                                                            <label>Twitter</label>
+                                                            <div class="ls-inputicon-box"> 
+                                                                <input class="form-control wt-form-control" name="twitter_link" value="{{ app_user.twitter_link }}" type="text" placeholder="https://twitter.com/">
+                                                                <i class="fs-input-icon fab fa-twitter"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="col-xl-4 col-lg-6 col-md-12">    
+                                                        <div class="form-group">
+                                                            <label>linkedin</label>
+                                                            <div class="ls-inputicon-box"> 
+                                                                <input class="form-control wt-form-control" name="linkedin_link" value="{{ app_user.linkedin_link }}" type="text" placeholder="https://in.linkedin.com/">
+                                                                <i class="fs-input-icon fab fa-linkedin-in"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                     
+                                                    
+                                                    <div class="col-xl-4 col-lg-6 col-md-12">                               
+                                                        <div class="form-group">
+                                                            <label>Instagram</label>
+                                                            <div class="ls-inputicon-box"> 
+                                                                <input class="form-control wt-form-control" name="instagram_link" value="{{ app_user.instagram_link }}" type="text" placeholder="https://www.instagram.com/">
+                                                                <i class="fs-input-icon fab fa-instagram"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>    
+                                                        
+                                                    <div class="col-xl-4 col-lg-6 col-md-12">    
+                                                        <div class="form-group">
+                                                            <label>github</label>
+                                                            <div class="ls-inputicon-box"> 
+                                                                <input class="form-control wt-form-control" name="github_link" value="{{ app_user.github_link }}" type="text" placeholder="https://in.pinterest.com/">
+                                                                <i class="fs-input-icon fab fa-github"></i>
+                                                            </div>
+                                                        </div>                 
+                                                    </div>
+                                                    
+                                                    
+                                                    
+                                                    <div class="col-xl-4 col-lg-6 col-md-12">    
+                                                        <div class="form-group">
+                                                            <label>Discord</label>
+                                                            <div class="ls-inputicon-box"> 
+                                                                <input class="form-control wt-form-control" nname="discord_link" value="{{ app_user.discord_link }}" type="text" placeholder="https://www.youtube.com/">
+                                                                <i class="fs-input-icon fab fa-discord"></i>
+                                                            </div>
+                                                        </div>                  
+                                                    </div> 
+                                                                                                                
+                                                <div class="col-lg-12 col-md-12">                                   
+                                                        <div class="text-left">
+                                                            <button type="submit" class="site-button">Save Changes</button>
+                                                        </div>
+                                                    </div> 
+                                                                                        
+                                                
+                                            </div>
+                                                    
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>             
+                    </div>
+                </div>
+
+                                                     
+
+
+        <!--Delete Profile Popup-->
+        <div class="modal fade twm-model-popup" id="delete-dash-profile" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h4 class="modal-title">Do you want to delete your profile?</h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="site-button" data-bs-dismiss="modal">No</button>
+                    <button type="button" class="site-button outline-primary">Yes</button>
+                </div>
+            </div>
+            </div>
+        </div>
+
+
+        <!--Logout Profile Popup-->
+        <div class="modal fade twm-model-popup" id="logout-dash-profile" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h4 class="modal-title">Do you want to Logout your profile?</h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="site-button" data-bs-dismiss="modal">No</button>
+                    <button type="button" class="site-button outline-primary">Yes</button>
+                </div>
+            </div>
+            </div>
+        </div>
+
+    </div>
+
+    {% endblock %}
+
+      
+
+
+
