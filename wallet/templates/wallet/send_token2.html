@@ -41,17 +41,26 @@
 <!--Login popup -->
             <div class="twm-sign-up">
                 <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content" style="max-width: 450px !important;">
+                    <div class="modal-content" style="max-width: 550px !important;">
                     
                         <form method="POST">
                             {% csrf_token %}
                             <div class="modal-header">
                                 <h2 class="modal-title" id="sign_up_popupLabel2">Withdraw</h2>
                                 <small>via metamask</small>
-                                <p>Ensure the Recipient's address is on the brc20 network</p>
+                                <p>Ensure you're connected to your metamask wallet</p>
                                 
+                                <button type="button" class="enableEthereumButton btn log_with_google" style="background-color:#D7C1B3"><img width="30px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/MetaMask_Fox.svg/2048px-MetaMask_Fox.svg.png" alt=""> Connect Metamask</button>
+
                             </div>
+                            
                             <div class="modal-body">
+                                <small>Account: <small><span class="showAccount"></span></small>
+                                                    {% if domain_name %}
+                                                       
+                                                        {{ domain_name }}
+                                                    {% endif %}
+                                                </small>
                                 <div class="twm-tabs-style-2">
                                     
                                     
@@ -81,30 +90,28 @@
                                                     <div class="form-group mb-3">
                                                         <div class=" form-check">
                                                             <input type="checkbox" checked class="form-check-input" id="Password3">
-                                                            <label class="form-check-label rem-forgot">Amount: {{ brise_balance|floatformat:5|intcomma }} <a href="javascript:;">other token</a></label>
+                                                            <label class="form-check-label rem-forgot">Amount: {{ brise_balance|floatformat:5|intcomma }} </label>
                                                             
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <input name="txn_hash" id="txn_hash" type="hidden" value="none">
-                                                <small>Account: <span class="showAccount"></span>
-                                                    {% if domain_name %}
-                                                        <br />
-                                                        {{ domain_name }}
-                                                    {% endif %}
-                                                </small>
+                                                
 
-                                                <div class="col-md-4">
+                                                <div class="col-md-12">
                                                     <input name="wallet_address" id="wallet_address" type="hidden" value="none">
                                                     <input name="token_address" id="token_address" type="hidden" value="{{ token_address }}">
-                                                    <button type="button" class="site-button enableEthereumButton">Connect</button>
+                                                    
                                                 </div>
-                                                <div class="col-md-4">
+                                                <div class="col-md-6" style="margin-bottom: 20px">
                                                     <button type="button" class="site-button sendEthButton">Withdraw</button>
                                                 </div>
-                                                <div class="col-md-4">
+
+                                                <div class="col-md-6">
                                                     <button type="submit" class="site-button">Done</button>
                                                 </div>
+
+
                                                 
                                             </div>
                                         </div>

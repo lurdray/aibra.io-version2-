@@ -141,7 +141,7 @@ def SignInView(request):
                     else:
                         print("22222222222222222222222222222222")
                         messages.warning(request, "Welcome Onboard")
-                        return HttpResponseRedirect(reverse("app_user:update_appuser"))
+                        return HttpResponseRedirect(reverse("job:index"))
                 
                 
                 else:

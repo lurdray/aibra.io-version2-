@@ -3,7 +3,7 @@
 
 
 {% block content %}
-
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 {% if messages %}
     {% for message in messages %}
         <div class="notification is-toast alert alert-{{message.tags}} text-center" role="alert" style="background-color: red; color: #fff; border-radius: 6px; font-weight: 600; z-index: 1;">
@@ -12,12 +12,14 @@
     {% endfor %}
 {% endif %}
 
+
 <!-- Login Section Start -->
             <div class="section-full site-bg-white">
                 
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-xl-5 col-lg-6 col-md-7">
+                            <br><br>
                             <div class="twm-log-reg-form-wrap">
                                 <div class="twm-log-reg-logo-head">
                                     <a href="/">
@@ -25,18 +27,34 @@
                                     </a> 
                                 </div>
 
+
+                                
+
                                 <form method="post">
                                 {% csrf_token %}
                                 <div class="twm-log-reg-inner">
 
                                     <div class="col-md-12">
                                         <div class="form-group">
-    
-                                            <button type="button" class="enableEthereumButton btn">Connect Metamask</button>
+                                            <p style="text-align: center;" class="center-text-or">Step 1</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                
+                                            <button type="button" class="enableEthereumButton btn log_with_google" style="background-color:#D7C1B3"><img width="30px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/MetaMask_Fox.svg/2048px-MetaMask_Fox.svg.png" alt=""> Connect Metamask</button>
                                             <input name="wallet_address" id="wallet_address" type="hidden" value="none">
                                             <button type="button" class="site-button sendEthButton" hidden>Pay</button>
-                                            <button type="submit" class="btn">Proceed</button>
-                                            <b><span class="showAccount"></span></b>
+                                            <br>
+
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <p style="text-align: center;" class="center-text-or" >STEP 2</p>
+                                                </div>
+                                            </div>
+                                            <button type="submit" class="btn log_with_google" style="background-color:#D7C1B3">Proceed <i class="bi bi-arrow-right"></i></button>
+                                            <p style="text-align:center;" class="showAccount"></p>
     
                                         </div>
                                     </div>

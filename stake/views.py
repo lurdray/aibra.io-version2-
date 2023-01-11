@@ -358,7 +358,7 @@ def RequestPaymentView(request, staking_id):
             return_checker = "25%"
 
 
-        context = {"stake": stake, "ready": ready, "return_checker": return_checker}
+        context = {"stake": stake, "ready": ready, "return_checker": return_checker, "app_user":app_user}
         return render(request, "stake/request_payment.html", context)
         
 def error_404(request, exception):

@@ -167,8 +167,8 @@
                                                 <ul>
                                                     <li><a href="dashboard.html"><i class="fa fa-home"></i>Dashboard</a></li>
                                                     <li><a href="dash-messages.html"><i class="fa fa-envelope"></i> Messages</a></li>
-                                                    <li><a href="dash-my-profile.html"><i class="fa fa-user"></i> Profile</a></li>
-                                                    <li><a href="index.html"><i class="fa fa-share-square"></i> Logout</a></li>
+                                                    <li><a href="{% url 'resume:index' %}"><i class="fa fa-user"></i> Profile</a></li>
+                                                    <li><a href="javascript:;" data-bs-toggle="modal" data-bs-target="#logout-dash-profile"><i class="fa fa-share-square"></i> Logout</a></li>
                                                 </ul>
                                                     
                                                 
@@ -191,5 +191,23 @@
                 </div>
             </div>
             <!-- Header End -->
+            <!--Logout Profile Popup-->
+        <div class="modal fade twm-model-popup" id="logout-dash-profile" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h4 class="modal-title">Do you want to Logout your profile?</h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="site-button" data-bs-dismiss="modal">No</button>
+                    <a role="button" href="{% url 'app_user:sign_out' %}" type="button" class="site-button outline-primary">Yes</a>
+                </div>
+            </div>
+            </div>
+        </div>
+
         
         </header>
