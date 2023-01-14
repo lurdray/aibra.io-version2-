@@ -1,0 +1,125 @@
+{% extends 'app_user/auth_base.html' %}
+{% load static %}
+{% load humanize %}
+
+
+{% block content %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+{% if messages %}
+    {% for message in messages %}
+        <div class="notification is-toast alert alert-{{message.tags}} text-center" role="alert" style="background-color: red; color: #fff; border-radius: 6px; font-weight: 600; z-index: 1;">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+
+{% include "app_user/header.html" %}
+
+{% include "app_user/sidebar.html" %}
+            <div id="content">
+
+            <div class="content-admin-main">
+
+
+                <div class="wt-admin-right-page-header clearfix">
+                    <h2 style="text-align:center;">Wallet</h2>
+                    
+                </div>
+            
+                
+
+                <div class="container">
+                    <div class="row">
+                        
+                        
+
+                        <div class="col-lg-12 col-md-12">
+                            
+
+                            <div class="twm-candidates-grid-wrap">
+                                <div class="row">
+
+
+                            
+                            
+                                
+
+                                    <div class="col-lg-3 col-md-3">
+                                    </div>
+                                    
+                                    <div class="col-lg-6 col-md-6">
+                                         <div class="twm-candidates-grid-style1 mb-5">
+                                             
+                                             <div class="twm-mid-content">
+                                                 
+                                                 
+                                                 <p style="text-align: center;"> <img class="img-fluid rounded-circle" width="50px" src="https://static.oklink.com/cdn/explorer/currency/token/okt-okb-0xdf54b6c6195ea4d948d03bfd818d365cf175cfc2.png"></p>
+                                                 <div class="twm-media">
+                                                 
+                                                
+                                                 <div class="twm-candidates-tag"><span>
+                                                    
+                                                        {{ app_user.wallet_address|truncatechars:15 }} <a data-hex='{{ app_user.wallet_address}}'  class="copy-btn uk-button uk-button-primary uk-width-1-1 "><i class="bi bi-clipboard"></i></a>
+                                                    
+                                                </span></div>
+
+                                             </div>
+                                             <br>
+                                                 <a href="" class="twm-view-prifile site-text-primary">{{ brise_balance|floatformat:4|intcomma }}</a>
+                                                 
+                                                 <div class="twm-fot-content">
+                                                    {% for item in data %}
+                                                     <div class="twm-left-info">
+                                                        <p class="twm-candidate-address"><img class="img-fluid rounded-circle" width="30px" src="{{ item.logo }}" alt="" data-original-title="" title=""> {{ item.name }}<br><small>${{ item.unit_price|floatformat:10|intcomma }}</small></p>
+                                                        <div class="twm-jobs-vacancies">${{ item.total_price|floatformat:10|intcomma }} <a  href="{% url 'wallet:send_okx_token' item.token_address %}" role="button" class="custom-toltip">
+                                                    <span class="fa fa-share-square"></span>
+                                                    <span class="custom-toltip-block">Withdraw</span>
+                                                </a>
+                                                </div>
+                                                </div>
+                                                     <hr>
+                                                     {% endfor %}
+                                                     
+                                                    
+                                                </div>
+                                             </div>
+                                             
+                                         </div>
+                                    </div>
+                                    
+                                    
+        
+                                
+                                
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>   
+            <!-- OUR BLOG END -->
+          
+            
+     
+        </div>
+        <!-- CONTENT END -->
+        <script type="text/javascript">
+  const copyBtns = [...document.getElementsByClassName('copy-btn')]
+  let previous = null
+
+  copyBtns.forEach(btn=> btn.addEventListener('click', ()=>{
+    const number = btn.getAttribute('data-hex')
+    navigator.clipboard.writeText(number)
+    btn.innerHTML = '<i  class="bi bi-clipboard-check-fill"></i>'
+
+    if (previous) {
+      previous.innerHTML = '<i  class="bi bi-check2-all"></i>';
+    }
+    previous = btn
+  }))
+  
+  
+</script>
+
+
+{% endblock %}

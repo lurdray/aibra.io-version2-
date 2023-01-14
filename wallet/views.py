@@ -53,6 +53,31 @@ def IndexView(request):
 		context = {"domain_name": RayGetName(app_user.wallet_address), "app_user": app_user, "brise_balance": brise_balance, "total": total, "data": data,}
 		return render(request, "wallet/index.html", context )
 
+@login_required(login_url='/app/sign-in/')
+def OkxView(request):
+	app_user = AppUser.objects.get(user__pk=request.user.id)
+
+	if request.method == "POST":
+		pass
+
+
+	else:
+		if app_user.wallet_address == "null":
+			resp = requests.post("https://api.iotexchartapp.com/okx-create-wallet/", data={"username": app_user.user}).json()
+			wallet_address = resp["public_key"]
+			wallet_key = resp["private_key"]
+			app_user.wallet_address = wallet_address
+			app_user.wallet_key = wallet_key
+			app_user.save()
+		
+		resp = requests.get("https://api.iotexchartapp.com/okx-get-balance/%s" % (app_user.wallet_address)).json()
+		data = resp["data"]
+		brise_balance = data[0]["balance"]
+		total = 0
+		for item in data:
+			total += float(item['total_price'])
+		context = {"app_user": app_user, "brise_balance": brise_balance, "total": total, "data": data,}
+		return render(request, "wallet/okx.html", context )
 
 
 @login_required(login_url='/app/sign-in/')
@@ -239,6 +264,127 @@ def SendTokenView(request, token_address):
 			return render(request, "wallet/send_token2.html", context)
 		else:
 			return render(request, "wallet/send_token.html", context)
+
+
+
+@login_required(login_url='/app/sign-in/')
+def SendOKxTokenView(request, token_address):
+	app_user = AppUser.objects.get(user__pk=request.user.id)
+	if request.method == "POST":
+
+		if app_user.user.username == app_user.wallet_address:
+			txn_hash = request.POST.get("txn_hash")
+			if txn_hash != None:
+				messages.success(request, "Success: %s" % (txn_hash))
+				return HttpResponseRedirect(reverse("wallet:okx-wallet"))
+			else:
+				messages.warning(request, "Not successfull out of Gas")
+				return HttpResponseRedirect(reverse("wallet:okx-wallet"))
+
+		else:
+			sender = app_user.wallet_address
+			sender_key = app_user.wallet_key
+			receiver = request.POST.get("receiver")
+			amount = request.POST.get("amount")
+
+			if receiver[0:2] != "0x":
+				receiver = RayGetAddress(receiver.replace(".brise", ""))
+			#	print("sdsd sd s ds  ds dsdsd s d s s ds d sd")
+			#print(receiver)
+
+			if token_address == "0x8f8526dbfd6e38e3d8307702ca8469bae6c56c15":
+				token = "wokt"
+			elif token_address == "0x12bb890508c125661e03b09ec06e404bc9289040":
+				token = "raca"
+			elif token_address == "0x81fde2721f556e402296b2a57e1871637c27d5e8":
+				token = "cgs"
+			elif token_address == "0x7a47ab305b8a2a3f4020d13fa9ef73cddcc0e7d4":
+				token = "wing"
+			elif token_address == "0xdf54b6c6195ea4d948d03bfd818d365cf175cfc2":
+				token = "okb"
+			elif token_address == "0xc3b730dD10A7e9A69204bDf6cb5A426e4f1F09E3":
+				token = "celt"
+			elif token_address == "0x8179d97eb6488860d816e3ecafe694a4153f216c":
+				token = "che"
+			elif token_address == "0xee9801669c6138e84bd50deb500827b776777d28":
+				token = "o3"
+			elif token_address == "0x08963db742ab159f27518d1d12188f69aa7387fb":
+				token = "loser"
+			elif token_address == "0xd0c6821aba4fcc65e8f1542589e64bae9de11228":
+				token = "flux"
+				#name = "Brise"
+			else:
+				pass
+			try:
+				resp = requests.post("https://api.iotexchartapp.com/send-okx/", data={"sender":sender,"sender_key":sender_key, "receiver": receiver, "amount":amount, "token":token}).json()
+				#SendB(sender, sender_key, receiver, amount, token)
+				txn_hash = resp["txn_hash"]
+				messages.success(request, "Success: %s" % (txn_hash))
+				return HttpResponseRedirect(reverse("wallet:index"))
+			except Exception as e:
+				messages.warning(request, "Not successfull out of Gas")
+				#print e
+				return HttpResponseRedirect(reverse("wallet:index"))
+	else:
+		resp = requests.get("https://api.iotexchartapp.com/okx-get-balance/%s" % (app_user.wallet_address)).json()
+		data = resp["data"]
+		if token_address == "0x8f8526dbfd6e38e3d8307702ca8469bae6c56c15":
+			token = "wokt"
+			token_name = "Wrapped OKT"
+			brise_balance = data[0]["balance"]
+			token_logo = data[0]["logo"]
+		elif token_address == "0x12bb890508c125661e03b09ec06e404bc9289040":
+			token = "raca"
+			token_name = "Radio Caca V2"
+			brise_balance = data[1]["balance"]
+			token_logo = data[1]["logo"]
+		elif token_address == "0x81fde2721f556e402296b2a57e1871637c27d5e8":
+			token = "cgs"
+			token_name = "Crypto Gladiator Shards"
+			brise_balance = data[3]["balance"]
+			token_logo = data[3]["logo"]
+		elif token_address == "0x7a47ab305b8a2a3f4020d13fa9ef73cddcc0e7d4":
+			token = "wing"
+			token_name = "Wing Token"
+			brise_balance = data[4]["balance"]
+			token_logo = data[4]["logo"]
+		elif token_address == "0xdf54b6c6195ea4d948d03bfd818d365cf175cfc2":
+			token = "okb"
+			token_name = "OKB"
+			brise_balance = data[5]["balance"]
+			token_logo = data[5]["logo"]
+		elif token_address == "0xc3b730dD10A7e9A69204bDf6cb5A426e4f1F09E3":
+			token = "celt"
+			token_name = "Celestial"
+			brise_balance = data[6]["balance"]
+			token_logo = data[6]["logo"]
+		elif token_address == "0x8179d97eb6488860d816e3ecafe694a4153f216c":
+			token = "che"
+			token_name = "Cherry Swap"
+			brise_balance = data[7]["balance"]
+			token_logo = data[7]["logo"]
+		elif token_address == "0xee9801669c6138e84bd50deb500827b776777d28":
+			token = "o3"
+			token_name = "o3 SwapToken"
+			brise_balance = data[8]["balance"]
+			token_logo = data[8]["logo"]
+		elif token_address == "0x08963db742ab159f27518d1d12188f69aa7387fb":
+			token = "loser"
+			token_name = "Loser Coin"
+			brise_balance = data[9]["balance"]
+			token_logo = data[9]["logo"]
+		elif token_address == "0xd0c6821aba4fcc65e8f1542589e64bae9de11228":
+			token = "flux"
+			token_name = "Flux Protocol"
+			brise_balance = data[10]["balance"]
+			token_logo = data[10]["logo"]
+		
+		context = {"app_user": app_user, "token":token, "token_name":token_name, "token_address": token_address, "brise_balance":brise_balance, "token_logo":token_logo, "data":data}
+		
+		if app_user.user.username == app_user.wallet_address:
+			return render(request, "wallet/send_okx_token2.html", context)
+		else:
+			return render(request, "wallet/send_okx_token.html", context)
 
 		
 

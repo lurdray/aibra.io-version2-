@@ -1,0 +1,130 @@
+{% extends 'app_user/auth_base.html' %}
+{% load static %}
+{% load humanize %}
+
+
+{% block content %}
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="notification is-toast alert alert-{{message.tags}} text-center" role="alert" style="background-color: red; color: #fff; border-radius: 6px; font-weight: 600; z-index: 1;">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+
+
+
+<style type="text/css">
+    .ls-inputicon-box img{
+     position: absolute !important;
+     margin-top: 15px !important;
+     left: 0;
+     top: 0 !important;
+     width: 30px !important;
+     height: 30px !important;
+     z-index: 5;
+     line-height: 40px !important;
+     text-align: center !important;
+     font-size: 16px;
+     color: #24695c;
+    } 
+</style>
+
+{% include "app_user/header.html" %}
+{% include "app_user/sidebar.html" %}
+
+            <div id="content">
+
+            <div class="content-admin-main">
+<br><br><br>
+<!--Login popup -->
+            <div class="twm-sign-up">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content" style="max-width: 550px !important;">
+                    
+                        <form method="POST">
+                            {% csrf_token %}
+                            <div class="modal-header">
+                                <h2 class="modal-title" id="sign_up_popupLabel2">Withdraw</h2>
+                                <small>via metamask</small>
+                                <p>Ensure you're connected to your metamask wallet</p>
+                                
+                                <button type="button" class="enableEthereumButton btn log_with_google" style="background-color:#D7C1B3"><img width="30px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/MetaMask_Fox.svg/2048px-MetaMask_Fox.svg.png" alt=""> Connect Metamask</button>
+
+                            </div>
+                            
+                            <div class="modal-body">
+                                <small>Account: <small><span class="showAccount"></span></small>
+                                                    {% if domain_name %}
+                                                       
+                                                        {{ domain_name }}
+                                                    {% endif %}
+                                                </small>
+                                <div class="twm-tabs-style-2">
+                                    
+                                    
+                                    <div class="tab-content" id="">
+                                        <!--Login Candidate Content-->  
+                                        <div class="tab-pane fade show active" id="login-candidate">
+                                            <div class="row">
+
+                                                <div class="col-lg-12">
+                                                    <div class="form-group mb-3">
+                                                        <input id="recipient" name="recipient" type="text" required="" class="form-control" placeholder="0x23456....345">
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="col-lg-12">
+                                                    <div class="form-group mb-3">
+                                                        <div class="ls-inputicon-box">  
+                                                        <input id="amount" name="amount" type="text" class="form-control" required="" placeholder="0.0">
+                                                        <img class="fs-input-icon" width="30px" src="{{ token_logo }}" alt=""  data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                        
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                
+                                                <div class="col-lg-12">
+                                                    <div class="form-group mb-3">
+                                                        <div class=" form-check">
+                                                            <input type="checkbox" checked class="form-check-input" id="Password3">
+                                                            <label class="form-check-label rem-forgot">Amount: {{ brise_balance|floatformat:5|intcomma }} </label>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <input name="txn_hash" id="txn_hash" type="hidden" value="none">
+                                                
+
+                                                <div class="col-md-12">
+                                                    <input name="wallet_address" id="wallet_address" type="hidden" value="none">
+                                                    <input name="token_address" id="token_address" type="hidden" value="{{ token_address }}">
+                                                    
+                                                </div>
+                                                <div class="col-md-6" style="margin-bottom: 20px">
+                                                    <button type="button" class="site-button sendEthButton">Withdraw</button>
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <button type="submit" class="site-button">Done</button>
+                                                </div>
+
+
+                                                
+                                            </div>
+                                        </div>
+                                        
+                                    
+                                    </div>
+                                </div> 
+                            </div>
+                            
+                        </form>
+                    </div>
+                </div>
+            </div>
+        <!--Model Popup Section End-->
+
+{% endblock %}
