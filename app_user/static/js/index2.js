@@ -73,14 +73,37 @@ sendEthButton.addEventListener("click", () => {
         document.getElementById("amount").readOnly = true;
         
         //const amountk = web3.utils.toWei(amount, 'ether');
+        
         const valuek = web3.utils.numberToHex(amountk);
 
+
 		//let result = await window.contract.methods.register(domain_name)
-        let result = await window.contract.methods.transfer(recipient, valuek).send({ from: account, });
-		    console.info("== result: ", result)
-        document.getElementById("txn_hash").value = result.blockHash;
-        console.log(result.blockHash)
-		
+        if (address == "0x8fff93e810a2edaafc326edee51071da9d398e83"){
+          //const amountk = web3.utils.toWei(amount, 'ether');
+          //const valuek = web3.utils.toHex(amountk);
+
+          ethereum
+            .request({
+              method: 'eth_sendTransaction',
+              params: [
+                {
+                  from: accounts[0],
+                  to: recipient,
+                  value: valuek,
+                },
+              ],
+            })
+            .then((txHash) => document.getElementById("amount").readOnly = true)
+            .catch((error) => console.error)
+            .finally((txHash) => document.getElementById("txn_hash").value = txHash)
+        }
+
+        else{
+          let result = await window.contract.methods.transfer(recipient, valuek).send({ from: account, });
+          console.info("== result: ", result)
+          document.getElementById("txn_hash").value = result.blockHash;
+          console.log(result.blockHash)
+        }
 	  }
 	
 	run();
