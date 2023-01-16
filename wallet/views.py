@@ -23,9 +23,11 @@ def RayGetName(wallet_address):
 
 	return domain_name
 
+
 def RayGetAddress(domain_name):
 	resp = requests.get("https://api.aibra.io/bns/get-address/%s/" % (domain_name)).json()
 	return resp
+
 
 @login_required(login_url='/app/sign-in/')
 def IndexView(request):
